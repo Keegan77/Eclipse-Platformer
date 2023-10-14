@@ -29,6 +29,11 @@ public class Day2Night : MonoBehaviour
 
     //public GameObject myObject;
 
+    public Collider myCollider;
+
+    public bool dayCollision;
+    public bool nightCollision;
+
     // transform? 
 
     Renderer myRenderer;
@@ -41,9 +46,16 @@ public class Day2Night : MonoBehaviour
     { // here we define what properties the object will have during the day
 
         //myRenderer.material.shader = myDayShader;
-       //. myRenderer.material.mainTexture = dayTexture;
+        //myRenderer.material.mainTexture = dayTexture;
+        //myObject.SetActive(true);
+        if (dayCollision)
+        {
+            myCollider.enabled = true;
+        }else 
+            myCollider.enabled = false;
 
         myMeshRenderer.material = myDayTexture;
+        
 
     }
     private void myInteractionNight() 
@@ -51,6 +63,13 @@ public class Day2Night : MonoBehaviour
 
         //myRenderer.material.mainTexture = nightTexture;
 
+        //myObject.SetActive(false);
+        if (nightCollision)
+        {
+            myCollider.enabled = true;
+        }
+        else
+            myCollider.enabled = false;
 
         myMeshRenderer.material = myNightTexture;
         //myRenderer.material.shader = myNightShader;
@@ -68,12 +87,10 @@ public class Day2Night : MonoBehaviour
 
     private void myInteraction()
     {
-        if (myMove.currentTime/*myMove.getTime()*/)
+        if (myMove.currentTime)
             myInteractionNight();
         else
             myInteractionDay();
-
-
     }
 
 
@@ -81,6 +98,9 @@ public class Day2Night : MonoBehaviour
     {
         myRenderer = GetComponent<Renderer>();
         myMeshRenderer = GetComponent<MeshRenderer>();
+        //myObject = GetComponent<GameObject>();
+        myCollider = GetComponent<Collider>();
+   
     }
 
 

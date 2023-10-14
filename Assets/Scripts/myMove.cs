@@ -77,25 +77,25 @@ public class myMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //playerOnGround = controller.isGrounded;
-        //if (playerOnGround && velocity.y < 0)
-        //{
-        //    velocity.y = 0f;
-        //}
+        playerOnGround = controller.isGrounded;
+        if (playerOnGround && velocity.y < 0)
+        {
+            velocity.y = 0f;
+        }
 
-        //Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //controller.Move(move * Time.deltaTime * speed);
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move(move * Time.deltaTime * speed);
 
-        //if (move != Vector3.zero)
-        //{
-        //    gameObject.transform.forward = move;
-        //}
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
 
-        //// Changes the height position of the player..
-        //if (Input.GetButtonDown("Jump") && playerOnGround)
-        //{
-        //    velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-        //}
+        // Changes the height position of the player..
+        if (Input.GetButtonDown("Jump") && playerOnGround)
+        {
+            velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        }
 
         if (Input.GetKeyDown(KeyCode.Q)) {
 
@@ -104,7 +104,7 @@ public class myMove : MonoBehaviour
             updateBool();
         }
 
-        //velocity.y += gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
