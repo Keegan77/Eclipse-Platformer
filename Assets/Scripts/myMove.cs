@@ -38,7 +38,7 @@ public class myMove : MonoBehaviour
     }
     public void onTimeChangeNight()
     {
-        speed = 3.0f;
+        speed = 6.0f;
         jumpHeight = 10.0f;
 
     }

@@ -36,9 +36,9 @@ public class Day2Night : MonoBehaviour
 
     // transform? 
 
-    Renderer myRenderer;
+    //Renderer myRenderer;
 
-    MeshRenderer myMeshRenderer;
+    private MeshRenderer myMeshRenderer;
 
     private myMove myMove;
 
@@ -96,7 +96,7 @@ public class Day2Night : MonoBehaviour
 
     private void Start()
     {
-        myRenderer = GetComponent<Renderer>();
+        //myRenderer = GetComponent<Renderer>();
         myMeshRenderer = GetComponent<MeshRenderer>();
         //myObject = GetComponent<GameObject>();
         myCollider = GetComponent<Collider>();
