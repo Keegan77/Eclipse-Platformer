@@ -8,7 +8,7 @@ public class PlayerAirborneState : PlayerState
     {
     }
     float timer;
-    float buffer = .1f;
+    float buffer = .3f;
     public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
     {
         base.AnimationTriggerEvent(anim);
@@ -44,9 +44,13 @@ public class PlayerAirborneState : PlayerState
         timer += Time.deltaTime;
         base.StateUpdate();
 
+        player.speedTarget = player.maxSpeed *
+                  (Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().x)
+                 + Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().y)); //simple way of speed checking the joystick
+
         player.currentSpeed = Mathf.Lerp(player.currentSpeed,
-                                             player.maxSpeed,
-                                             Time.deltaTime * player.accelSpeed);
+                                         player.speedTarget,
+                                         Time.deltaTime * player.accelSpeed);
 
         if (player.jumpInput == false)
         {
@@ -56,7 +60,7 @@ public class PlayerAirborneState : PlayerState
 
         if (player.CheckGround() && player.rb.velocity.y <= 0 && timer > buffer)
         {
-            playerFsm.SwitchState(player.idleState);
+            playerFsm.SwitchState(player.movementState);
             //Debug.Log("Switched");
         }
     }

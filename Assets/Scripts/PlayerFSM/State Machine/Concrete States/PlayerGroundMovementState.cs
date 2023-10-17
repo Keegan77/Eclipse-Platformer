@@ -30,10 +30,12 @@ public class PlayerGroundMovementState : PlayerState
     {
         base.StateUpdate();
 
-        
+        player.speedTarget = player.maxSpeed * 
+            (Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().x)
+           + Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().y)); //simple way of speed checking the joystick
 
         player.currentSpeed = Mathf.Lerp(player.currentSpeed,
-                                         player.maxSpeed,
+                                         player.speedTarget,
                                          Time.deltaTime * player.accelSpeed);
 
         if (player.CheckGround() && player.jumpInput && player.rb.velocity.y == 0)

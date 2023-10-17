@@ -10,10 +10,11 @@ public class Player : MonoBehaviour
     //todo: refactor player movement vars into scriptable objects.
     //this script also handles input
 
-    private Input input = null;
+    [HideInInspector] public Input input = null;
 
     [Header("Ground Movement Variables")]
     public float maxSpeed;
+    [HideInInspector]public float speedTarget;
 
     public float turningSpeed;
 
@@ -73,6 +74,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        speedTarget = maxSpeed;
         stateMachine.Init(idleState);
     }
 
@@ -87,6 +89,7 @@ public class Player : MonoBehaviour
         targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // get target angle here so all states can inheret them from player
 
         movedirection = Quaternion.Euler(direction.x, targetAngle, direction.z) * Vector3.forward;
+        speedTarget = Mathf.Clamp(speedTarget, -maxSpeed, maxSpeed);
 
     }
 
