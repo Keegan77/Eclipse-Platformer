@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    //This script is for common variables that every concrete state requires for calculations,
+    //and common methods that they need, components, etc.
+    //todo: refactor player movement vars into scriptable objects.
+    //this script also handles input
+
+    private Input input = null;
+
     [Header("Ground Movement Variables")]
     public float maxSpeed;
 
@@ -37,7 +45,7 @@ public class Player : MonoBehaviour
     //groundCollDebug
     [Header("Debug")]
     [Range(0, 10)] public float groundCollX;
-    [Range(0, 10)] public float groundCollY;
+    [Range(0, 40)] public float groundCollY;
     [Range(0, 10)] public float groundCollZ;
 
     //state machine
@@ -46,7 +54,7 @@ public class Player : MonoBehaviour
     public PlayerAirborneState airborneState;
     public PlayerIdleState idleState;
 
-    //privs
+    //getters
     public Vector3 movedirection { get; private set; }
     public float targetAngle {get; private set;}
 
@@ -55,6 +63,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        input = new Input();
+        //state refs
         stateMachine = new PlayerStateMachine();
         movementState = new PlayerGroundMovementState(this, stateMachine);
         airborneState = new PlayerAirborneState(this, stateMachine);
@@ -69,27 +79,17 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentPlayerState.StateUpdate();
-        GetInput();
-        CheckGround();
-        Debug.Log(stateMachine.currentPlayerState);
 
-        direction = new Vector2(hoz, vert).normalized; // save input via vector,
+        CheckGround();
+         // save input via vector,
                                                        // which gives you a direction
 
         targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // get target angle here so all states can inheret them from player
 
         movedirection = Quaternion.Euler(direction.x, targetAngle, direction.z) * Vector3.forward;
+
     }
-    public void Jump()
-    {
-        rb.AddForce(Vector3.up * jumpAmount, ForceMode.Impulse);
-        stateMachine.SwitchState(airborneState);
-        /*jump is located here so you can go airborne w/o jumping
-        (like falling off of ledge)
-        the idea is that if you want to jump and go airborne, 
-        call jump from the player object in your state, otherwise, just switch to airborne. 
-        silly edge case*/
-    }
+
     private void FixedUpdate()
     {
         stateMachine.currentPlayerState.StateFixedUpdate();
@@ -129,10 +129,42 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentPlayerState.AnimationTriggerEvent(anim);
     }
-    private void GetInput()
+
+    private void OnEnable()
     {
-        hoz = Input.GetAxisRaw("Horizontal"); // get inputs
-        vert = Input.GetAxisRaw("Vertical");
-        jumpInput = Input.GetButtonDown("Jump");
+        input.Enable();
+        input.Player.Movement.performed += GetMoveInput;
+        input.Player.Movement.canceled += OnMoveInputCancelled;
+        input.Player.Jump.performed += OnJump;
+        input.Player.Jump.canceled += OnJumpRelease;
+        
     }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Player.Movement.performed -= GetMoveInput;
+        input.Player.Movement.canceled -= OnMoveInputCancelled;
+        input.Player.Jump.performed -= OnJump;
+        input.Player.Jump.canceled -= OnJumpRelease;
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        jumpInput = true;
+    }
+    private void OnJumpRelease(InputAction.CallbackContext ctx)
+    {
+        jumpInput = false;
+    }
+
+    private void GetMoveInput(InputAction.CallbackContext ctx)
+    {
+        direction = ctx.ReadValue<Vector2>().normalized;
+    }
+    private void OnMoveInputCancelled(InputAction.CallbackContext ctx)
+    {
+        direction = Vector2.zero;
+    }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerState
 {
-
+    
     public PlayerIdleState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm) //class constructor
     {
     }
@@ -17,6 +17,12 @@ public class PlayerIdleState : PlayerState
     public override void StateExit()
     {
         base.StateExit();
+        if (jump == true)
+        {
+            player.rb.AddForce(Vector3.up * player.jumpAmount, ForceMode.Impulse);
+            //Debug.Log("Exit jump from idle state");
+            jump = false;
+        }
     }
 
     public override void StateFixedUpdate()
@@ -32,8 +38,9 @@ public class PlayerIdleState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
-    }
 
+    }
+    bool jump;
     public override void StateUpdate()
     {
         base.StateUpdate();
@@ -45,7 +52,8 @@ public class PlayerIdleState : PlayerState
 
         if (player.jumpInput && player.CheckGround())
         {
-            player.Jump();
+            jump = true;
+            playerFsm.SwitchState(player.airborneState);
         } else if (!player.CheckGround())
         {
             playerFsm.SwitchState(player.airborneState);

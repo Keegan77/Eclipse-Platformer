@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGroundMovementState : PlayerState
 {
     public PlayerGroundMovementState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm) { }
+    bool jump;  
     public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
     {
         base.AnimationTriggerEvent(anim);
@@ -23,6 +24,7 @@ public class PlayerGroundMovementState : PlayerState
 
 
     }
+    
 
     public override void StateUpdate()
     {
@@ -34,11 +36,12 @@ public class PlayerGroundMovementState : PlayerState
                                          player.maxSpeed,
                                          Time.deltaTime * player.accelSpeed);
 
-        if (player.CheckGround() && player.jumpInput)
+        if (player.CheckGround() && player.jumpInput && player.rb.velocity.y == 0)
         {
-            player.Jump();//switches to jump state
+            jump = true;
+            playerFsm.SwitchState(player.airborneState);
         }
-        else if (!player.CheckGround() && !player.jumpInput )
+        else if (!player.CheckGround() && !player.jumpInput)
         {
             playerFsm.SwitchState(player.airborneState); //switch to airborne with no jump
         }
@@ -46,6 +49,22 @@ public class PlayerGroundMovementState : PlayerState
         if (player.direction.magnitude == 0)
         {
             playerFsm.SwitchState(player.idleState);
+        }
+    }
+
+    public override void StateStart()
+    {
+        base.StateStart();
+    }
+
+    public override void StateExit()
+    {
+        base.StateExit();
+        if (jump)
+        {
+            //Debug.Log("Exit jump from movement state");
+            player.rb.AddForce(Vector3.up * player.jumpAmount, ForceMode.Impulse);
+            jump = false;
         }
     }
 }

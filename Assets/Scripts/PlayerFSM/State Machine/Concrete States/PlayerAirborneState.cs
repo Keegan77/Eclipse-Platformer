@@ -7,8 +7,8 @@ public class PlayerAirborneState : PlayerState
     public PlayerAirborneState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm)
     {
     }
-    bool jumpLetOff;
-
+    float timer;
+    float buffer = .1f;
     public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
     {
         base.AnimationTriggerEvent(anim);
@@ -36,25 +36,29 @@ public class PlayerAirborneState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
+        Debug.Log("airborne entered");
+        timer = 0;
     }
 
     public override void StateUpdate()
     {
+        timer += Time.deltaTime;
         base.StateUpdate();
 
         player.currentSpeed = Mathf.Lerp(player.currentSpeed,
                                              player.maxSpeed,
                                              Time.deltaTime * player.accelSpeed);
 
-        if (Input.GetKeyUp(KeyCode.Space) && !player.CheckGround())
+        if (player.jumpInput == false)
         {
             player.rb.velocity = new Vector2(player.rb.velocity.x, Mathf.Min(player.rb.velocity.y, player.jumpAmount / player.jumpCutMultiplier));
             //dynamic jump cutoff
         }
 
-        if (player.CheckGround() && player.rb.velocity.y < 0)
+        if (player.CheckGround() && player.rb.velocity.y <= 0 && timer > buffer)
         {
-            playerFsm.SwitchState(player.movementState);
+            playerFsm.SwitchState(player.idleState);
+            //Debug.Log("Switched");
         }
     }
 }
