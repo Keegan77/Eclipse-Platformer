@@ -9,21 +9,16 @@ public class PlayerGroundMovementState : PlayerState
     {
         base.AnimationTriggerEvent(anim);
     }
-
     public override void StateFixedUpdate()
     {
         base.StateFixedUpdate();
 
-        Debug.Log(player.direction.magnitude);
 
-        player.currentSpeed = Mathf.Lerp(player.currentSpeed,
-                                         player.maxSpeed,
-                                         Time.deltaTime * player.accelSpeed);
+        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(new Vector3(0, player.targetAngle, 0)), Time.deltaTime * player.turningSpeed);
 
-        float targetAngle = Mathf.Atan2(player.direction.x, player.direction.y) * Mathf.Rad2Deg + player.cam.eulerAngles.y; // gives the target angle based on input
-        player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(new Vector3(0, targetAngle, 0)), Time.deltaTime * player.turningSpeed);
-        Vector3 movedirection = Quaternion.Euler(player.direction.x, targetAngle, player.direction.z) * Vector3.forward;
-        player.rb.velocity = new Vector3(movedirection.x * player.currentSpeed, player.rb.velocity.y, movedirection.z * player.currentSpeed); //affect movement
+        
+
+        player.rb.velocity = new Vector3(player.movedirection.x * player.currentSpeed, player.rb.velocity.y, player.movedirection.z * player.currentSpeed); //affect movement
 
 
 
@@ -32,6 +27,12 @@ public class PlayerGroundMovementState : PlayerState
     public override void StateUpdate()
     {
         base.StateUpdate();
+
+        
+
+        player.currentSpeed = Mathf.Lerp(player.currentSpeed,
+                                         player.maxSpeed,
+                                         Time.deltaTime * player.accelSpeed);
 
         if (player.CheckGround() && player.jumpInput)
         {

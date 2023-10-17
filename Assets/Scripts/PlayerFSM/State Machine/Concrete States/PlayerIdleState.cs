@@ -46,7 +46,7 @@ public class PlayerIdleState : PlayerState
         if (player.jumpInput && player.CheckGround())
         {
             player.Jump();
-        } else if (!player.jumpInput && !player.CheckGround())
+        } else if (!player.CheckGround())
         {
             playerFsm.SwitchState(player.airborneState);
         }

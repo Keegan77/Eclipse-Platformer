@@ -46,6 +46,10 @@ public class Player : MonoBehaviour
     public PlayerAirborneState airborneState;
     public PlayerIdleState idleState;
 
+    //privs
+    public Vector3 movedirection { get; private set; }
+    public float targetAngle {get; private set;}
+
 
     [HideInInspector] public Vector3 direction;
 
@@ -71,6 +75,10 @@ public class Player : MonoBehaviour
 
         direction = new Vector2(hoz, vert).normalized; // save input via vector,
                                                        // which gives you a direction
+
+        targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // get target angle here so all states can inheret them from player
+
+        movedirection = Quaternion.Euler(direction.x, targetAngle, direction.z) * Vector3.forward;
     }
     public void Jump()
     {
