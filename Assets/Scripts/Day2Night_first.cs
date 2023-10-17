@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public class Day2Night : MonoBehaviour
+public class Day2Night_first : MonoBehaviour
 {
 
     //             Read me 
@@ -26,6 +26,9 @@ public class Day2Night : MonoBehaviour
     //public Texture dayTexture, nightTexture;
 
     public Material myDayTexture, myNightTexture;
+    private stateChangeEffect myStateChanger;
+
+    private Rigidbody myRigidbody;
 
     //public GameObject myObject;
 
@@ -34,13 +37,18 @@ public class Day2Night : MonoBehaviour
     public bool dayCollision;
     public bool nightCollision;
 
+    //public delegate void changeTime();
+    //public static event changeTime timeChange;
+
+    public static bool currentTime = true;
+
     // transform? 
 
     //Renderer myRenderer;
 
     private MeshRenderer myMeshRenderer;
 
-    private myMove myMove;
+    //private myMove myMove;
 
     private void myInteractionDay()
     { // here we define what properties the object will have during the day
@@ -75,19 +83,19 @@ public class Day2Night : MonoBehaviour
         //myRenderer.material.shader = myNightShader;
     }
 
-    private void OnEnable()
-    {
-        myMove.timeChange += myInteraction;
-    }
+    //private void OnEnable()
+    //{
+    //    myMove.timeChange += myInteraction;
+    //}
 
-    private void OnDisable()
-    {
-        myMove.timeChange -= myInteraction;
-    }
+    //private void OnDisable()
+    //{
+    //    myMove.timeChange -= myInteraction;
+    //}
 
-    private void myInteraction()
+    public void myInteraction()
     {
-        if (myMove.currentTime)
+        if (currentTime)
             myInteractionNight();
         else
             myInteractionDay();
@@ -100,7 +108,25 @@ public class Day2Night : MonoBehaviour
         myMeshRenderer = GetComponent<MeshRenderer>();
         //myObject = GetComponent<GameObject>();
         myCollider = GetComponent<Collider>();
+
+        //timeChange += myInteraction;
+
+        myRigidbody = GetComponent<Rigidbody>();
+
+        if(myRigidbody != null)
+        {
+
+            myRigidbody = new Rigidbody();
+
+        }
+
+        //myRigidbody.
    
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 
 

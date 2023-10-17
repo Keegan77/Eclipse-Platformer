@@ -17,8 +17,8 @@ public class myMove : MonoBehaviour
     //public static event dayTime timeChangeDay;
    // public static event nightTime timeChangeNight;
 
-    public delegate void changeTime();
-    public static event changeTime timeChange;
+    //public delegate void changeTime();
+    //public static event changeTime timeChange;
 
 
     public static bool currentTime = true; // true for day? idk 
@@ -26,20 +26,20 @@ public class myMove : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity; 
     private float speed = 6.0f;
-    private float jumpHeight = 20.0f;
+    //private float jumpHeight = 20.0f;
     private float gravity = -5.0f;
-    public bool playerOnGround;
+    //public bool playerOnGround;
 
     public void onTimeChangeDay() {
 
         speed = 6.0f;
-        jumpHeight = 5.0f;
+        //jumpHeight = 5.0f;
     
     }
     public void onTimeChangeNight()
     {
         speed = 6.0f;
-        jumpHeight = 10.0f;
+        //jumpHeight = 10.0f;
 
     }
 
@@ -70,18 +70,18 @@ public class myMove : MonoBehaviour
     {
         controller = gameObject.AddComponent<CharacterController>();
 
-        timeChange += onTimeChange;
+        //timeChange += onTimeChange;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerOnGround = controller.isGrounded;
-        if (playerOnGround && velocity.y < 0)
-        {
-            velocity.y = 0f;
-        }
+        //playerOnGround = controller.isGrounded;
+        //if (playerOnGround && velocity.y < 0)
+        //{
+        //    velocity.y = 0f;
+        //}
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * speed);
@@ -91,18 +91,18 @@ public class myMove : MonoBehaviour
             gameObject.transform.forward = move;
         }
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && playerOnGround)
-        {
-            velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-        }
+        //// Changes the height position of the player..
+        //if (Input.GetButtonDown("Jump") && playerOnGround)
+        //{
+        //    velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        //if (Input.GetKeyDown(KeyCode.Q)) {
 
-            timeChange?.Invoke();
+           //timeChange?.Invoke();
 
-            updateBool();
-        }
+           //updateBool();
+        //}
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
