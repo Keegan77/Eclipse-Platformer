@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentPlayerState.StateUpdate();
-
+        Debug.Log(input.Player.Movement.ReadValue<Vector2>());
         CheckGround();
          // save input via vector,
                                                        // which gives you a direction

@@ -36,7 +36,6 @@ public class PlayerAirborneState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
-        Debug.Log("airborne entered");
         timer = 0;
     }
 

@@ -62,7 +62,6 @@ public class PlayerGroundMovementState : PlayerState
         base.StateExit();
         if (jump)
         {
-            //Debug.Log("Exit jump from movement state");
             player.rb.AddForce(Vector3.up * player.jumpAmount, ForceMode.Impulse);
             jump = false;
         }
