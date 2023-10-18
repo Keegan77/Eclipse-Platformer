@@ -18,6 +18,9 @@ public class Day2Night : MonoBehaviour
     // for whatever we want to change 
 
 
+
+
+
     //--------------------------------------------------------//
 
 
@@ -29,12 +32,12 @@ public class Day2Night : MonoBehaviour
     private Rigidbody myRigidbody;
     int frames;
     //private Time myTime;
-
-    public stateChangeEffect stateShift;
+    private stateChangeEffect stateShift;
+    //public stateChangeEffect stateShift;
 
     //public GameObject myObject;
 
-    public Collider myCollider;
+    private Collider myCollider;
 
     public bool dayCollision;
     public bool nightCollision;
@@ -47,7 +50,8 @@ public class Day2Night : MonoBehaviour
     //private bool wait = false;
     private bool counting = false;
 
-    private myMove myMove;
+
+    //private myMove myMove;
     
 
     private void myInteractionDay()
@@ -92,7 +96,7 @@ public class Day2Night : MonoBehaviour
 
         if (counting == true) {
             // if the player pressed the button before the timer went off 
-            if (myMove.currentTime)
+            if (stateShift.timeOfDay)//stateShift.timeOfDay)
                 myInteractionNight();
             else
                 myInteractionDay();
@@ -113,6 +117,10 @@ public class Day2Night : MonoBehaviour
 
     private void Start()
     {
+
+        stateShift = FindObjectOfType<stateChangeEffect>();
+
+
         myMeshRenderer = GetComponent<MeshRenderer>();
 
         myCollider = GetComponent<Collider>();
@@ -124,18 +132,17 @@ public class Day2Night : MonoBehaviour
 
         myRigidbody.useGravity = false;
 
-
         myCollider.includeLayers = 7;
-        stateShift.myShift += myInteraction;
+        stateShift.myShift += myInteraction;//stateShift.myShift += myInteraction;
 
         
     }
 
     private void OnTriggerEnter(Collider other)
     {   // if we are entered by the object we want to see
-        Debug.Log(gameObject.name);
+        //Debug.Log(gameObject.name);
         if (other.gameObject.TryGetComponent<stateChangeEffect>( out stateChangeEffect changer)) {
-            if (myMove.currentTime)
+            if (stateShift.timeOfDay)//stateShift.timeOfDay)
                 myInteractionNight();
             else
                 myInteractionDay();
@@ -153,7 +160,7 @@ public class Day2Night : MonoBehaviour
 
         //if (wait /*|| myTime*/) // we are checking for player effect
         //{
-        //    if (myMove.currentTime)
+        //    if (stateShift.timeOfDay)
         //        myInteractionNight();
         //    else
         //        myInteractionDay();
@@ -163,7 +170,7 @@ public class Day2Night : MonoBehaviour
             //     AND  the timer has gone off
             counting = false;
 
-            if (myMove.currentTime)
+            if (stateShift.timeOfDay)
                 myInteractionNight();
             else
                 myInteractionDay();

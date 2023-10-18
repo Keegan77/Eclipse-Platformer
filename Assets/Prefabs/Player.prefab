@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497178514475356677}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.361588, y: 1.503, z: -2.846154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -70,7 +70,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497178514475356677}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2bbd7a3bda1cc814d89414175aeacd17, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -108,13 +108,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4017446f879772241804cf2259965057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 13
+  speedTarget: 0
   turningSpeed: 10
   deccelSpeed: 5
   accelSpeed: 5
   jumpAmount: 350
   currentSpeed: 0
-  jumpCutMultiplier: 2
+  jumpCutMultiplier: 50
   rb: {fileID: 5945421513744250802}
   cam: {fileID: 0}
   groundCheck: {fileID: 5774751503933113772}
@@ -122,11 +123,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  hoz: 0
-  vert: 0
-  jumpInput: 0
   groundCollX: 5.2
-  groundCollY: 8.03
+  groundCollY: 33.9
   groundCollZ: 3.82
   direction: {x: 0, y: 0, z: 0}
 --- !u!1001 &6318181497965339207
