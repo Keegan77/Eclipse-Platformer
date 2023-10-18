@@ -38,11 +38,6 @@ public class Player : MonoBehaviour
 
     //public Animator animator;
 
-    //input vars
-    [HideInInspector] public float hoz;
-    [HideInInspector] public float vert;
-    [HideInInspector] public bool jumpInput;
-
     //groundCollDebug
     [Header("Debug")]
     [Range(0, 10)] public float groundCollX;
@@ -81,21 +76,22 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentPlayerState.StateUpdate();
-        Debug.Log(input.Player.Movement.ReadValue<Vector2>());
         CheckGround();
-         // save input via vector,
-                                                       // which gives you a direction
+    }
 
-        targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // get target angle here so all states can inheret them from player
-
-        movedirection = Quaternion.Euler(direction.x, targetAngle, direction.z) * Vector3.forward;
-        speedTarget = Mathf.Clamp(speedTarget, -maxSpeed, maxSpeed);
-
+    public void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpAmount, ForceMode.Impulse);
+        stateMachine.SwitchState(airborneState);
     }
 
     private void FixedUpdate()
     {
         stateMachine.currentPlayerState.StateFixedUpdate();
+        targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // get target angle here so all states can inheret them from player
+
+        movedirection = Quaternion.Euler(direction.x, targetAngle, direction.z) * Vector3.forward;
+        speedTarget = Mathf.Clamp(speedTarget, -maxSpeed, maxSpeed);
     }
 
     public bool CheckGround()
@@ -139,8 +135,6 @@ public class Player : MonoBehaviour
         input.Player.Movement.performed += GetMoveInput;
         input.Player.Movement.canceled += OnMoveInputCancelled;
         input.Player.Jump.performed += OnJump;
-        input.Player.Jump.canceled += OnJumpRelease;
-        
     }
 
     private void OnDisable()
@@ -149,18 +143,15 @@ public class Player : MonoBehaviour
         input.Player.Movement.performed -= GetMoveInput;
         input.Player.Movement.canceled -= OnMoveInputCancelled;
         input.Player.Jump.performed -= OnJump;
-        input.Player.Jump.canceled -= OnJumpRelease;
     }
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        jumpInput = true;
+        if (stateMachine.currentPlayerState == movementState || stateMachine.currentPlayerState == idleState)
+        {
+            Jump();
+        }
     }
-    private void OnJumpRelease(InputAction.CallbackContext ctx)
-    {
-        jumpInput = false;
-    }
-
     private void GetMoveInput(InputAction.CallbackContext ctx)
     {
         direction = ctx.ReadValue<Vector2>().normalized;

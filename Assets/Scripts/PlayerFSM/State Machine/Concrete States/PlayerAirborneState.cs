@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAirborneState : PlayerState
 {
     public PlayerAirborneState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm)
     {
     }
-    float timer;
-    float buffer = .3f;
+
     public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
     {
         base.AnimationTriggerEvent(anim);
     }
 
-    public override void StateExit()
-    {
-        base.StateExit();
-    }
+
 
     public override void StateFixedUpdate()
     {
@@ -36,12 +33,21 @@ public class PlayerAirborneState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
-        timer = 0;
+        player.input.Player.Jump.canceled += cutJump;
+    }
+    public override void StateExit()
+    {
+        base.StateExit();
+        player.input.Player.Jump.canceled -= cutJump;
+    }
+
+    private void cutJump(InputAction.CallbackContext ctx)
+    {
+        player.rb.velocity = new Vector2(player.rb.velocity.x, Mathf.Min(player.rb.velocity.y, player.jumpAmount / player.jumpCutMultiplier));
     }
 
     public override void StateUpdate()
     {
-        timer += Time.deltaTime;
         base.StateUpdate();
 
         player.speedTarget = player.maxSpeed *
@@ -52,13 +58,8 @@ public class PlayerAirborneState : PlayerState
                                          player.speedTarget,
                                          Time.deltaTime * player.accelSpeed);
 
-        if (player.jumpInput == false)
-        {
-            player.rb.velocity = new Vector2(player.rb.velocity.x, Mathf.Min(player.rb.velocity.y, player.jumpAmount / player.jumpCutMultiplier));
-            //dynamic jump cutoff
-        }
 
-        if (player.CheckGround() && player.rb.velocity.y <= 0 && timer > buffer)
+        if (player.CheckGround() && player.rb.velocity.y < 0)
         {
             playerFsm.SwitchState(player.movementState);
             //Debug.Log("Switched");
