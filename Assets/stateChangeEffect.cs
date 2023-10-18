@@ -5,13 +5,18 @@ using Unity.VisualScripting;
 //using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 // this script attaches to the player object
 //anchors?
+
+// frensel effect!
+
 public class stateChangeEffect : MonoBehaviour
 {
-    private myMove myMove;
+    //private timeOfDay timeOfDay;
+    public bool timeOfDay = false;
     private MeshRenderer myMeshRenderer;
     public Material myDayTexture, myNightTexture;
     private Shader myShader;
@@ -42,27 +47,17 @@ public class stateChangeEffect : MonoBehaviour
     Vector3 myVector3 = Vector3.one;
 
 
+    private Input myInput = null; 
+
 
     // Start is called before the first frame update
     void Start()
     {
-        myMove = GetComponent<myMove>();
+        //timeOfDay = GetComponent<timeOfDay>();
         myMeshRenderer = GetComponent<MeshRenderer>();
         myShader = GetComponent<Shader>();
         myCollider = GetComponent<Collider>();
-        //myRigidbody = GetComponent<Rigidbody>();
 
-        // do not collider with any layers
-        //myRigidbody = new Rigidbody();
-        //myRigidbody.excludeLayers = 0;
-
-        //        SphereCollider sc = gameObject.AddComponent<SphereCollider>();
-        //myRigidbody = gameObject.AddComponent<Rigidbody>();
-        //myRigidbody.excludeLayers = 0;
-        //myRigidbody.includeLayers = 7;
-        //myRigidbody.useGravity = false;
-        //myRigidbody.isKinematic = ;
-        
 
         // expand rate applied here
         myVector3 = myVector3 * expandRate;
@@ -71,15 +66,9 @@ public class stateChangeEffect : MonoBehaviour
         transform.localScale = Vector3.zero;
         myCollider.includeLayers = 7;
 
-        // disable collider if there is one
-        //if (myCollider != null) {
-        //    myCollider.enabled = false;
-        //}
-        myCollider.isTrigger = true;
-        // add event delegate
-        //myMove.timeChange += myInteraction;
 
-        //myTypeCastTimer = (float)myTimer;
+        myCollider.isTrigger = true;
+
         myIncrement = (0.5f / ((float)myTimer));
 
         tempTimer = myTimer + 1;
@@ -89,22 +78,37 @@ public class stateChangeEffect : MonoBehaviour
 
     private void OnDestroy()
     {   // remove event delegate
-        //myMove.timeChange -= myInteraction;
+
         myShift = null;
 
     }
 
-    //void OnCollisionEnter(Collision collision) {
-    //    foreach (ContactPoint contact in collision.contacts)
-    //    {
-    //        //Debug.DrawRay(contact.point, contact.normal, Color.white);
-    //    }
-    //}
+    private void Awake()
+    {
+            myInput = new Input();
+    }
 
+    private void OnEnable()
+    {
+        myInput.Enable();
+
+        myInput.Player.SwitchTime.performed += myButtonPress;
+
+    }
+    private void OnDisable()
+    {
+        myInput.Disable();
+    }
+
+    private void myButtonPress(InputAction.CallbackContext  myContext) 
+    {
+        myInteraction();
+        myShift?.Invoke();
+
+    }
     private void myInteraction()
     {
         //slow mow!
-        //Time.timeScale = 0.5f;
         // enable sphere
         transform.localScale = Vector3.one;
 
@@ -113,23 +117,19 @@ public class stateChangeEffect : MonoBehaviour
         myThingy = 1f + myThingyIncrement;
 
 
-        if (myMove.currentTime)
+        if (timeOfDay)
         {
-            //myInteractionNight();
+
             myMeshRenderer.material = myNightTexture;
-            //myMeshRenderer.material.color = Color.red;
-            //myMeshRenderer.material.set
-            myMove.currentTime = !myMove.currentTime;
+            timeOfDay = !timeOfDay;
         }
         else
         {
-            //myInteractionDay();
+
             myMeshRenderer.material = myDayTexture;
-            //myMeshRenderer.material.color = Color.blue;
-            myMove.currentTime = !myMove.currentTime;
+            timeOfDay = !timeOfDay;
         }
 
-        //myColorIncrement = (myMeshRenderer.material.color.a / (float)myTimer);
 
     }
    
@@ -140,12 +140,7 @@ public class stateChangeEffect : MonoBehaviour
 
         if (tempTimer <= myTimer)
         {
-            // debug statement
-            //if (tempTimer % 10 == 0) { 
-            //Debug.Log(tempTimer + ", " + myIncrement
-            //    + ", " + Time.timeScale + ", " /*+ myColorIncrement*/
-            //    + ", " /*+ myMeshRenderer.material.color.a*/);
-            //}
+
             Time.timeScale = Mathf.Log10(myThingy);
             // increment timer
             tempTimer += 1;
@@ -159,10 +154,6 @@ public class stateChangeEffect : MonoBehaviour
             transform.localScale = Vector3.zero;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            myInteraction();
-            myShift?.Invoke();
-        }
+
     }
 }

@@ -238,14 +238,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 304830779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da73f4e3e60d32145a4bd4def3743f8b, type: 3}
+  m_Script: {fileID: 11500000, guid: c30d6515ff704f540baa12face274451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeOfDay: 0
   myDayTexture: {fileID: 2100000, guid: 6ccc9afb85f3e5c408fef203f4ea1c23, type: 2}
   myNightTexture: {fileID: 2100000, guid: 6366fdbf16126d7498476161da538917, type: 2}
-  myCollider: {fileID: 304830781}
-  myTimer: 1200
-  enableSlowMo: 1
+  myTimer: 100
   expandRate: 0.01
 --- !u!1 &1481361969
 GameObject:
@@ -364,7 +363,7 @@ GameObject:
   - component: {fileID: 1733037674}
   - component: {fileID: 1733037673}
   - component: {fileID: 1733037672}
-  - component: {fileID: 1733037671}
+  - component: {fileID: 1733037676}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -372,23 +371,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1733037671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733037670}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bce69b1bbc24fd49821aab48e547ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myDayTexture: {fileID: 2100000, guid: 520b792419013a344a000e901bca6597, type: 2}
-  myNightTexture: {fileID: 2100000, guid: 1b0f6e8c80ca16c408a593b2b0f9eb08, type: 2}
-  myCollider: {fileID: 1733037672}
-  dayCollision: 1
-  nightCollision: 0
 --- !u!135 &1733037672
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -475,6 +457,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733037676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733037670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64267496041ff354faeb66ea62a13c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDayTexture: {fileID: 2100000, guid: 2d07102aa65a74e48b900c66283e57eb, type: 2}
+  myNightTexture: {fileID: 2100000, guid: 1b0f6e8c80ca16c408a593b2b0f9eb08, type: 2}
+  dayCollision: 0
+  nightCollision: 0
 --- !u!1 &1774878219
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +683,6 @@ GameObject:
   - component: {fileID: 1961658695}
   - component: {fileID: 1961658694}
   - component: {fileID: 1961658693}
-  - component: {fileID: 1961658692}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -693,19 +690,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1961658692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961658691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7884698c8e95934193c191b4d55e4be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myStateChanger: {fileID: 304830784}
 --- !u!136 &1961658693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -901,7 +885,7 @@ GameObject:
   - component: {fileID: 2117799441}
   - component: {fileID: 2117799440}
   - component: {fileID: 2117799439}
-  - component: {fileID: 2117799438}
+  - component: {fileID: 2117799443}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -909,22 +893,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2117799438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117799437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe41d479a3d8e043b59ccbda9df3a52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayCollisionWithPlayer: 1
-  nightCollisionWithPlayer: 1
-  dayMat: {fileID: 2100000, guid: 520b792419013a344a000e901bca6597, type: 2}
-  nightMat: {fileID: 2100000, guid: 1b0f6e8c80ca16c408a593b2b0f9eb08, type: 2}
 --- !u!65 &2117799439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1012,6 +980,22 @@ Transform:
   - {fileID: 1481361970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2117799443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117799437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64267496041ff354faeb66ea62a13c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDayTexture: {fileID: 2100000, guid: 2d07102aa65a74e48b900c66283e57eb, type: 2}
+  myNightTexture: {fileID: 2100000, guid: 1b0f6e8c80ca16c408a593b2b0f9eb08, type: 2}
+  dayCollision: 0
+  nightCollision: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
