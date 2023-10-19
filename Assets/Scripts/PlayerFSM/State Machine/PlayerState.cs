@@ -21,5 +21,5 @@ public class PlayerState
 
     public virtual void StateFixedUpdate() { }
 
-    public virtual void AnimationTriggerEvent(Player.AnimationTriggerType anim) { }
+    public virtual void StateCollisionEnter(Collision collision) { }
 }
