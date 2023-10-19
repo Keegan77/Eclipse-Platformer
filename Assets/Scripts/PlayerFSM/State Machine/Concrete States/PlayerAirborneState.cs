@@ -14,11 +14,17 @@ public class PlayerAirborneState : PlayerState
         base.StateFixedUpdate();
         if (player.direction.magnitude > 0)
         {
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(new Vector3(0, player.targetAngle, 0)), Time.deltaTime * player.turningSpeed);
+            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(new Vector3(0, player.targetAngle, 0)), Time.deltaTime * player.airTurnControlSpeed);
 
-            player.rb.velocity = new Vector3(player.movedirection.x * player.currentSpeed, player.rb.velocity.y, player.movedirection.z * player.currentSpeed); //affect movement
-
+            //player.rb.velocity = new Vector3(player.transform.forward.x * player.currentSpeed, player.rb.velocity.y, player.movedirection.z * player.currentSpeed); //affect movement
+            player.rb.velocity = new Vector3(player.movedirection.x * player.currentSpeed, player.rb.velocity.y, player.movedirection.z * player.currentSpeed);
             //placeholder air movement code, copied from ground movement                                                                                                                                      //throwing ground movement in air for testing
+        } else //deccel
+        {
+            player.rb.velocity = new Vector3(Mathf.Lerp(player.rb.velocity.x, 0, Time.deltaTime * player.airDeccelSpeed),
+                                            player.rb.velocity.y,
+                                 Mathf.Lerp(player.rb.velocity.z, 0, Time.deltaTime * player.airDeccelSpeed));
+            player.currentSpeed = 0;
         }
 
     }
@@ -51,7 +57,7 @@ public class PlayerAirborneState : PlayerState
 
         player.currentSpeed = Mathf.Lerp(player.currentSpeed,
                                          player.speedTarget,
-                                         Time.deltaTime * player.accelSpeed);
+                                         Time.deltaTime * player.accelSpeed / 5);
 
 
         if (player.CheckGround() && player.rb.velocity.y < 0)

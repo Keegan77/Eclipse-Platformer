@@ -9,6 +9,7 @@ public class PlayerAnims
         Idle,
         Run,
         Jump,
+        Dive
     }
 
     public static readonly Dictionary<AnimationNames, string> AnimationTriggers = new Dictionary<AnimationNames, string>
@@ -16,6 +17,7 @@ public class PlayerAnims
     { AnimationNames.Idle, "Idle" },
     { AnimationNames.Run, "Run" },
     { AnimationNames.Jump, "Jump"},
+    { AnimationNames.Dive, "Dived"},
     };
 
 }
