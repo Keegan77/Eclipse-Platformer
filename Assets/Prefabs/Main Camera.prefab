@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927770977423276790}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.009153742, y: -0.000000015221717, z: -5.088617e-10, w: 0.99995816}
+  m_LocalRotation: {x: -0.009153739, y: -0.000000015040285, z: -5.03087e-10, w: 0.99995816}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 2906459901209870334}
   - component: {fileID: 1683256335614383186}
   - component: {fileID: 604773920732541008}
-  - component: {fileID: 1892318682784442220}
+  - component: {fileID: 5472937138868328283}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1892318682784442220
+--- !u!114 &5472937138868328283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5002150957130182979}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0089884605, y: 0.0000000024657654, z: 9.3488065e-12, w: 0.99995965}
+  m_LocalRotation: {x: 0.0089884605, y: 0.000000002465538, z: 9.345693e-12, w: 0.99995965}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -767,7 +767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7258836171248155902}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.027175732, y: 0.0000000023749336, z: -3.5094684e-11, w: 0.99963075}
+  m_LocalRotation: {x: 0.027175732, y: 0.0000000023747058, z: -3.5093657e-11, w: 0.99963075}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
