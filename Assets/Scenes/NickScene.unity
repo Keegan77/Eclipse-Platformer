@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &79564200
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.837
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09899998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.488199
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071069
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18f722124f5c02645a4d4b690e169f6c, type: 2}
+    - target: {fileID: 919132149155446097, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
+      propertyPath: m_Name
+      value: Bounce Mushroom0.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b9baf5a02b365ec4c8e7c61615f4234c, type: 3}
 --- !u!1 &452195253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,3 +1546,4 @@ SceneRoots:
   - {fileID: 6146009990128483572}
   - {fileID: 6712615359346630397}
   - {fileID: 3996940371563885610}
+  - {fileID: 79564200}
