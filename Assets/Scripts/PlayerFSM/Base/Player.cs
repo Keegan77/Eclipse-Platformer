@@ -166,15 +166,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDive(InputAction.CallbackContext ctx)
+    private void OnDive(InputAction.CallbackContext ctx) //this is messy as f and it shouldn't be here. but im tired ok. im fucking tired. its going here.
     {
-        Debug.Log("Dive Attempt");
         if (stateMachine.currentPlayerState == movementState 
             || stateMachine.currentPlayerState == idleState 
             || stateMachine.currentPlayerState == airborneState)
         {
             stateMachine.SwitchState(diveState);
-            Debug.Log("Dive Success");
         }
     }
 

@@ -258,6 +258,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7919df41-6a64-4c0c-80c1-f9243c169c68",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d1fb4cde-18e1-46f0-96bf-52f75b6e60c6",
                     "path": "<Mouse>/{Delta}",
                     "interactions": "",

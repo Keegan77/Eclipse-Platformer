@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerSlidingState : PlayerState
 {
     public PlayerSlidingState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm)
     {
     }
+    Input input;
 
     public override void StateCollisionEnter(Collision collision)
     {
         base.StateCollisionEnter(collision);
     }
 
-    public override void StateExit()
-    {
-        base.StateExit();
-    }
+
 
     public override void StateFixedUpdate()
     {
@@ -33,6 +32,21 @@ public class PlayerSlidingState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
+        input = new Input();
+
+        input.Enable();
+        input.Player.Dive.performed += PerformRollout;
+    }
+
+    public override void StateExit()
+    {
+        base.StateExit();
+        input.Disable();
+    }
+
+    private void PerformRollout(InputAction.CallbackContext ctx)
+    {
+        playerFsm.SwitchState(player.idleState);
     }
 
     public override void StateUpdate()
