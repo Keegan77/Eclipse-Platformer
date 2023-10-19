@@ -22,4 +22,6 @@ public class PlayerState
     public virtual void StateFixedUpdate() { }
 
     public virtual void StateCollisionEnter(Collision collision) { }
+
+    public virtual void StateCollisionStay(Collision collision) { }
 }
