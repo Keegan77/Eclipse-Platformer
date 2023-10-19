@@ -17,10 +17,6 @@ public class Day2Night : MonoBehaviour
     // when we move between the two we need to set a day and night time value
     // for whatever we want to change 
 
-
-
-
-
     //--------------------------------------------------------//
 
 

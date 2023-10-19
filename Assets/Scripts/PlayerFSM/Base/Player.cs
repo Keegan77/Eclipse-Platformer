@@ -37,6 +37,11 @@ public class Player : MonoBehaviour
 
     [Header("Slide Control Variables")]
     public float slideDeccelAmount;
+    public float slideInitialSpeed;
+
+    [Header("Rollout Values")]
+    public float rolloutSpeed;
+    public float rollHeight;
 
     //components
     [Header("Component Refs")]
@@ -45,6 +50,8 @@ public class Player : MonoBehaviour
     public Transform cam;
     public Animator animator;
     public Transform groundCheck, playerRot;
+    public BoxCollider playerCollider;
+    public BoxCollider playerDiveCollider;
     public LayerMask whatIsGround;
 
     //public Animator animator;
@@ -62,10 +69,15 @@ public class Player : MonoBehaviour
     public PlayerIdleState idleState;
     public PlayerDivingState diveState;
     public PlayerSlidingState slideState;
+    public PlayerRolloutState rolloutState;
+
+    
 
     //getters
     public Vector3 movedirection { get; private set; }
     public float targetAngle { get; set; }
+    
+    [HideInInspector] public Vector3 cacheCollSize;
 
 
     [HideInInspector] public Vector3 direction;
@@ -80,10 +92,15 @@ public class Player : MonoBehaviour
         idleState = new PlayerIdleState(this, stateMachine);
         diveState = new PlayerDivingState(this, stateMachine);
         slideState = new PlayerSlidingState(this, stateMachine);
+        rolloutState = new PlayerRolloutState(this, stateMachine);
     }
 
     private void Start()
     {
+        cacheCollSize = playerCollider.size;
+        SwitchCollisionsToNormal();
+
+
         speedTarget = maxSpeed;
         stateMachine.Init(idleState);
     }
@@ -91,6 +108,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentPlayerState.StateUpdate();
+        Debug.Log(playerCollider.size);
         CheckGround();
     }
 
@@ -166,15 +184,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDive(InputAction.CallbackContext ctx)
+    private void OnDive(InputAction.CallbackContext ctx) //this is messy as f and it shouldn't be here. but im tired ok. im fucking tired. its going here.
     {
-        Debug.Log("Dive Attempt");
         if (stateMachine.currentPlayerState == movementState 
             || stateMachine.currentPlayerState == idleState 
             || stateMachine.currentPlayerState == airborneState)
         {
             stateMachine.SwitchState(diveState);
-            Debug.Log("Dive Success");
         }
     }
 
@@ -190,6 +206,22 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         stateMachine.currentPlayerState.StateCollisionEnter(collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        stateMachine.currentPlayerState.StateCollisionStay(collision);
+    }
+    public void SwitchCollisionsToNormal()
+    {
+        playerCollider.enabled = true;
+        playerDiveCollider.enabled = false;
+    }
+
+    public void SwitchCollisionsToDive()
+    {
+        playerCollider.enabled = false;
+        playerDiveCollider.enabled = true;
     }
 
 }

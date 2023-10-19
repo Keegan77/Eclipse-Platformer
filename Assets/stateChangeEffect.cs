@@ -20,9 +20,6 @@ public class stateChangeEffect : MonoBehaviour
     private MeshRenderer myMeshRenderer;
     public Material myDayTexture, myNightTexture;
     private Shader myShader;
-    //private Rigidbody myRigidbody;
-
-    //public Day2Night day2Night;
 
     public delegate void MyDelegate();
     public MyDelegate myShift;
@@ -148,7 +145,7 @@ public class stateChangeEffect : MonoBehaviour
             // EXPAND
             transform.localScale += myVector3;
         }
-        else
+        else // this is happening every frame :/
         { // timer is up 
             Time.timeScale = 1.0f;
             transform.localScale = Vector3.zero;

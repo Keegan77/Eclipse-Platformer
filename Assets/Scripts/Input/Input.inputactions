@@ -177,6 +177,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d30a0af7-65ab-43b1-b491-394333b8000f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "51ed1dd2-e25d-4a59-bd4b-18916a31b2be",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -189,7 +200,7 @@
                 {
                     "name": "",
                     "id": "c8245c7f-ee14-4e93-8f2b-c5fb4c786b06",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -211,7 +222,7 @@
                 {
                     "name": "",
                     "id": "8e9c2640-f01b-4f58-b25b-f16e7558713e",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -249,6 +260,17 @@
                     "name": "",
                     "id": "b89cf2ed-a0de-4b54-a9bb-31c79dd88c88",
                     "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7919df41-6a64-4c0c-80c1-f9243c169c68",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
