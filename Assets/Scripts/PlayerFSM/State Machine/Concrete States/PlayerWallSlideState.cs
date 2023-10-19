@@ -7,10 +7,6 @@ public class PlayerWallSlideState : PlayerState
     public PlayerWallSlideState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm)
     {
     }
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
-    {
-        base.AnimationTriggerEvent(anim);
-    }
 
     public override void StateExit()
     {
