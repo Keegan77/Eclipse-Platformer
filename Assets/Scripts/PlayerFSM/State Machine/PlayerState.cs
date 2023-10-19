@@ -20,6 +20,4 @@ public class PlayerState
     public virtual void StateUpdate() { }
 
     public virtual void StateFixedUpdate() { }
-
-    public virtual void AnimationTriggerEvent(Player.AnimationTriggerType anim) { }
 }

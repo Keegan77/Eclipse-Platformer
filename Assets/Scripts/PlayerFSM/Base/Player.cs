@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody rb;
     public Transform cam;
-    //public Animator animator;
+    public Animator animator;
     public Transform groundCheck, playerRot;
     public LayerMask whatIsGround;
 
@@ -113,21 +113,17 @@ public class Player : MonoBehaviour
                                         transform.localScale.y / groundCollY,
                                         transform.localScale.z / groundCollZ) * 2);
     }
-    public enum AnimationTriggerType
+
+
+    public void AnimationTriggerEvent(string anim)
     {
-        Idle,
-        Running,
-        Jumping,
-        Diving,
-        Rollout,
-        Wallslide,
-        Wallkick
+        animator.SetBool(anim, true);
+    }
+    public void AnimationFinishedEvent(string anim)
+    {
+        animator.SetBool(anim, false);
     }
 
-    private void AnimationTriggerEvent(AnimationTriggerType anim)
-    {
-        stateMachine.currentPlayerState.AnimationTriggerEvent(anim);
-    }
 
     private void OnEnable()
     {
