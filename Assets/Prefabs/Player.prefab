@@ -95,17 +95,29 @@ MonoBehaviour:
   jumpAmount: 350
   currentSpeed: 0
   jumpCutMultiplier: 50
+  airTurnControlSpeed: 2
+  airDeccelSpeed: 3
+  verticalDiveHeight: 150
+  horizontalDiveAmount: 200
+  divingMaxSpeed: 15
+  slideDeccelAmount: 1
+  slideInitialSpeed: 20
+  rolloutSpeed: 150
+  rollHeight: 125
   rb: {fileID: 5945421513744250802}
   cam: {fileID: 0}
   animator: {fileID: 3159665013910601903}
   groundCheck: {fileID: 9023329375636085461}
   playerRot: {fileID: 2444203162282136837}
+  playerCollider: {fileID: 4471085016406262165}
+  playerDiveCollider: {fileID: 8729049253955276967}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundCollX: 5.2
   groundCollY: 33.9
   groundCollZ: 3.82
+  cacheCollSize: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0, z: 0}
 --- !u!65 &4471085016406262165
 BoxCollider:
@@ -507,13 +519,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8729049253955276967}
   m_SourcePrefab: {fileID: 100100000, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
 --- !u!95 &3159665013910601903 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
   m_PrefabInstance: {fileID: 8841682343692320062}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8535058992963158127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
+  m_PrefabInstance: {fileID: 8841682343692320062}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8729049253955276967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8535058992963158127}
+  m_Material: {fileID: 13400000, guid: 2bbd7a3bda1cc814d89414175aeacd17, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6317272, y: 1.0444005, z: 1.4808301}
+  m_Center: {x: -0.013428211, y: 0.51407754, z: 0.43741506}
 --- !u!4 &9023329375636085461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
