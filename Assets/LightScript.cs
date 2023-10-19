@@ -14,20 +14,25 @@ public class NewBehaviourScript : MonoBehaviour
     private stateChangeEffect stateShift;
     private float increment;
     private int tempTimer;
-    //private bool toDay;
 
     private void Start()
     {
         stateShift = FindObjectOfType<stateChangeEffect>();
-
         stateShift.myShift += stateChange;
-
         myLight = GetComponent<Light>();
 
-        if (!activeDay || !stateShift.timeOfDay)
+        increment = (myLight.intensity / stateShift.myTimer);
+        // if we are not active in the day and it is day 
+        //                  and
+        // if we are not active at night and it is night ... 
+        // thats what this should be, but this is what works so idk
+        if ((activeDay && stateShift.timeOfDay) || (activeNight && !stateShift.timeOfDay))
         {
             myLight.intensity = 0f;
+            return;
         }
+        increment *= -1f;
+
     }
 
     private void OnDestroy()
@@ -37,55 +42,19 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void stateChange() { 
 
-        //myLight.enabled = false;
         tempTimer = 0;
-
-        if (stateShift.timeOfDay)
-        {
-            //toDay = false;
-
-            if (activeDay)
-            {
-                wait = true;
-                increment = 1f * myLight.intensity / stateShift.myTimer;
-            }
-            else {
-                increment = -1f * (myLight.intensity / stateShift.myTimer);
-                wait = true; 
-            }
-        }
-        else if (!stateShift.timeOfDay) {
-            //toDay = true;
-            if (activeNight)
-            {
-
-                wait = true;
-                increment = 1f * myLight.intensity / stateShift.myTimer;
-            }
-            else
-            {
-                increment = -1f * (myLight.intensity / stateShift.myTimer);
-                wait = true;
-            }
-        }
-
+        wait = true;
     }
 
     private void Update()
     {
         if (wait)
         {
-            if(tempTimer >= stateShift.myTimer)
+            if (tempTimer >= stateShift.myTimer)
             {
-                //myLight.intensity = 
-                if ((stateShift.timeOfDay && activeDay) || (!stateShift.timeOfDay && activeNight))
-                {
-                    myLight.intensity = 1;
-                }
-                else
-                    myLight.intensity = 0;
-
+                myLight.intensity = Mathf.Round(myLight.intensity);
                 wait = false;
+                increment *= -1f;
             }
             myLight.intensity += increment;
             tempTimer++;
