@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float maxSpeed;
     [HideInInspector]public float speedTarget;
 
+
     public float turningSpeed;
 
     public float deccelSpeed;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public float currentSpeed;
     [Header("Airborne Movement Variables")]
     public float jumpCutMultiplier;
+    public float airTurnControlSpeed;
+    public float airDeccelSpeed;
 
     //components
     [Header("Component Refs")]

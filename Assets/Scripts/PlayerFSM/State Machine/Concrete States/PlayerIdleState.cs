@@ -11,9 +11,9 @@ public class PlayerIdleState : PlayerState
     public override void StateFixedUpdate()
     {
         base.StateFixedUpdate();
-        player.rb.velocity = new Vector3(Mathf.Lerp(player.rb.velocity.x, player.rb.velocity.y, Time.deltaTime * player.deccelSpeed),
+        player.rb.velocity = new Vector3(Mathf.Lerp(player.rb.velocity.x, 0, Time.deltaTime * player.deccelSpeed),
                                                     player.rb.velocity.y,
-                                         Mathf.Lerp(player.rb.velocity.z, player.rb.velocity.y, Time.deltaTime * player.deccelSpeed));
+                                         Mathf.Lerp(player.rb.velocity.z, 0, Time.deltaTime * player.deccelSpeed));
         player.currentSpeed = 0;
         //this is for decceleration
     }
