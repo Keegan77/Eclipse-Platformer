@@ -53,6 +53,15 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dive"",
+                    ""type"": ""Button"",
+                    ""id"": ""8cd7553f-116a-4e1e-bac6-95a4e5714981"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -209,6 +218,28 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1278845-d715-43be-bfe9-8b07b93baedd"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e9c2640-f01b-4f58-b25b-f16e7558713e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -268,6 +299,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_SwitchTime = m_Player.FindAction("SwitchTime", throwIfNotFound: true);
+        m_Player_Dive = m_Player.FindAction("Dive", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_CameraLook = m_Camera.FindAction("CameraLook", throwIfNotFound: true);
@@ -336,6 +368,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_SwitchTime;
+    private readonly InputAction m_Player_Dive;
     public struct PlayerActions
     {
         private @Input m_Wrapper;
@@ -343,6 +376,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @SwitchTime => m_Wrapper.m_Player_SwitchTime;
+        public InputAction @Dive => m_Wrapper.m_Player_Dive;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -361,6 +395,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @SwitchTime.started += instance.OnSwitchTime;
             @SwitchTime.performed += instance.OnSwitchTime;
             @SwitchTime.canceled += instance.OnSwitchTime;
+            @Dive.started += instance.OnDive;
+            @Dive.performed += instance.OnDive;
+            @Dive.canceled += instance.OnDive;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -374,6 +411,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @SwitchTime.started -= instance.OnSwitchTime;
             @SwitchTime.performed -= instance.OnSwitchTime;
             @SwitchTime.canceled -= instance.OnSwitchTime;
+            @Dive.started -= instance.OnDive;
+            @Dive.performed -= instance.OnDive;
+            @Dive.canceled -= instance.OnDive;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -450,6 +490,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSwitchTime(InputAction.CallbackContext context);
+        void OnDive(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
