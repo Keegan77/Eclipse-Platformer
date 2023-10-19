@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     [Header("Ground Movement Variables")]
     public float maxSpeed;
-    [HideInInspector]public float speedTarget;
+    [HideInInspector] public float speedTarget;
 
 
     public float turningSpeed;
@@ -29,6 +29,14 @@ public class Player : MonoBehaviour
     public float jumpCutMultiplier;
     public float airTurnControlSpeed;
     public float airDeccelSpeed;
+
+    [Header("Dive Control Variables")]
+    public float verticalDiveHeight;
+    public float horizontalDiveAmount;
+    public float divingMaxSpeed;
+
+    [Header("Slide Control Variables")]
+    public float slideDeccelAmount;
 
     //components
     [Header("Component Refs")]
@@ -52,10 +60,12 @@ public class Player : MonoBehaviour
     public PlayerGroundMovementState movementState;
     public PlayerAirborneState airborneState;
     public PlayerIdleState idleState;
+    public PlayerDivingState diveState;
+    public PlayerSlidingState slideState;
 
     //getters
     public Vector3 movedirection { get; private set; }
-    public float targetAngle {get; private set;}
+    public float targetAngle { get; set; }
 
 
     [HideInInspector] public Vector3 direction;
@@ -68,6 +78,8 @@ public class Player : MonoBehaviour
         movementState = new PlayerGroundMovementState(this, stateMachine);
         airborneState = new PlayerAirborneState(this, stateMachine);
         idleState = new PlayerIdleState(this, stateMachine);
+        diveState = new PlayerDivingState(this, stateMachine);
+        slideState = new PlayerSlidingState(this, stateMachine);
     }
 
     private void Start()
@@ -134,6 +146,7 @@ public class Player : MonoBehaviour
         input.Player.Movement.performed += GetMoveInput;
         input.Player.Movement.canceled += OnMoveInputCancelled;
         input.Player.Jump.performed += OnJump;
+        input.Player.Dive.performed += OnDive;
     }
 
     private void OnDisable()
@@ -142,6 +155,7 @@ public class Player : MonoBehaviour
         input.Player.Movement.performed -= GetMoveInput;
         input.Player.Movement.canceled -= OnMoveInputCancelled;
         input.Player.Jump.performed -= OnJump;
+        input.Player.Dive.performed -= OnDive;
     }
 
     private void OnJump(InputAction.CallbackContext ctx)
@@ -151,6 +165,19 @@ public class Player : MonoBehaviour
             Jump();
         }
     }
+
+    private void OnDive(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Dive Attempt");
+        if (stateMachine.currentPlayerState == movementState 
+            || stateMachine.currentPlayerState == idleState 
+            || stateMachine.currentPlayerState == airborneState)
+        {
+            stateMachine.SwitchState(diveState);
+            Debug.Log("Dive Success");
+        }
+    }
+
     private void GetMoveInput(InputAction.CallbackContext ctx)
     {
         direction = ctx.ReadValue<Vector2>().normalized;
@@ -158,6 +185,11 @@ public class Player : MonoBehaviour
     private void OnMoveInputCancelled(InputAction.CallbackContext ctx)
     {
         direction = Vector2.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        stateMachine.currentPlayerState.StateCollisionEnter(collision);
     }
 
 }
