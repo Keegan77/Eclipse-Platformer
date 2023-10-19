@@ -9,6 +9,8 @@ public class PlayerSlidingState : PlayerState
     {
     }
     Input input;
+    float timer;
+    float minimumStateDuration = .5f; //in seconds
 
     public override void StateCollisionEnter(Collision collision)
     {
@@ -26,13 +28,13 @@ public class PlayerSlidingState : PlayerState
         player.rb.velocity = new Vector3(Mathf.Lerp(player.rb.velocity.x, 0, Time.deltaTime * player.slideDeccelAmount),
                                                     player.rb.velocity.y,
                                          Mathf.Lerp(player.rb.velocity.z, 0, Time.deltaTime * player.slideDeccelAmount));
-        player.currentSpeed = 0;
     }
 
     public override void StateStart()
     {
         base.StateStart();
         input = new Input();
+        player.rb.AddForce(player.transform.forward * (player.slideInitialSpeed), ForceMode.Force);
 
         input.Enable();
         input.Player.Dive.performed += PerformRollout;
@@ -41,21 +43,25 @@ public class PlayerSlidingState : PlayerState
     public override void StateExit()
     {
         base.StateExit();
+        timer = 0;
         input.Disable();
     }
 
     private void PerformRollout(InputAction.CallbackContext ctx)
     {
-        playerFsm.SwitchState(player.idleState);
+        playerFsm.SwitchState(player.rolloutState);
     }
 
     public override void StateUpdate()
     {
         base.StateUpdate();
 
-        if (player.rb.velocity.x < 1 && player.rb.velocity.z < 1)
+        timer += Time.deltaTime;
+
+        if (player.rb.velocity.x < .5f && player.rb.velocity.z < .5f && timer > minimumStateDuration)
         {
             playerFsm.SwitchState(player.idleState);
+            player.SwitchCollisionsToNormal();
         }
     }
 }
