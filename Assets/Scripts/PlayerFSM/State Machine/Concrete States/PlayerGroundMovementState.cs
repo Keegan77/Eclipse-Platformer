@@ -5,11 +5,7 @@ using UnityEngine;
 public class PlayerGroundMovementState : PlayerState
 {
     public PlayerGroundMovementState(Player player, PlayerStateMachine playerFsm) : base(player, playerFsm) { }
- 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
-    {
-        base.AnimationTriggerEvent(anim);
-    }
+
     public override void StateFixedUpdate()
     {
         base.StateFixedUpdate();
@@ -25,6 +21,12 @@ public class PlayerGroundMovementState : PlayerState
 
     }
     
+    private float LerpSpeed()
+    {
+        return Mathf.Lerp(player.currentSpeed,
+                   player.speedTarget,
+                   Time.deltaTime * player.accelSpeed);
+    }
 
     public override void StateUpdate()
     {
@@ -34,9 +36,8 @@ public class PlayerGroundMovementState : PlayerState
             (Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().x)
            + Mathf.Abs(player.input.Player.Movement.ReadValue<Vector2>().y)); //simple way of speed checking the joystick
 
-        player.currentSpeed = Mathf.Lerp(player.currentSpeed,
-                                         player.speedTarget,
-                                         Time.deltaTime * player.accelSpeed);
+        player.currentSpeed = LerpSpeed();
+        player.animator.speed = LerpSpeed() / player.maxSpeed;
 
         if (!player.CheckGround())
         {
@@ -52,13 +53,15 @@ public class PlayerGroundMovementState : PlayerState
     public override void StateStart()
     {
         base.StateStart();
+
+        player.AnimationTriggerEvent(PlayerAnims.AnimationTriggers[PlayerAnims.AnimationNames.Run]);
+
     }
 
     public override void StateExit()
     {
+        player.AnimationFinishedEvent(PlayerAnims.AnimationTriggers[PlayerAnims.AnimationNames.Run]);
+        player.animator.speed = 1;
         base.StateExit();
-
-        
-
     }
 }
