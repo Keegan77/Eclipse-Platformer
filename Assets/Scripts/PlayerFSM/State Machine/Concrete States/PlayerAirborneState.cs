@@ -9,13 +9,6 @@ public class PlayerAirborneState : PlayerState
     {
     }
 
-    public override void AnimationTriggerEvent(Player.AnimationTriggerType anim)
-    {
-        base.AnimationTriggerEvent(anim);
-    }
-
-
-
     public override void StateFixedUpdate()
     {
         base.StateFixedUpdate();
@@ -34,11 +27,13 @@ public class PlayerAirborneState : PlayerState
     {
         base.StateStart();
         player.input.Player.Jump.canceled += cutJump;
+        player.AnimationTriggerEvent(PlayerAnims.AnimationTriggers[PlayerAnims.AnimationNames.Jump]);
     }
     public override void StateExit()
     {
         base.StateExit();
         player.input.Player.Jump.canceled -= cutJump;
+        player.AnimationFinishedEvent(PlayerAnims.AnimationTriggers[PlayerAnims.AnimationNames.Jump]);
     }
 
     private void cutJump(InputAction.CallbackContext ctx)
