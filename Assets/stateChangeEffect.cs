@@ -34,22 +34,22 @@ public class stateChangeEffect : MonoBehaviour
 
 
     //private GameObject myGameObject;
-    private Collider myCollider;
+    //private Collider myCollider;
 
 
     // # of frames we expand for
     public int myTimer = 1;
     private int tempTimer;
 
-    private float myTempIncrement;
-    private float myIncrement;
+    //private float myTempIncrement;
+    //private float myIncrement;
     //private float myColorIncrement;
 
-    private float myThingy = 1;
-    private float myThingyIncrement = 0.1f;
+    //private float myThingy = 1;
+    //private float myThingyIncrement = 0.1f;
 
-    public float expandRate = 1.5f;
-    Vector3 myVector3 = Vector3.one;
+    //public float expandRate = 1.5f;
+    //Vector3 myVector3 = Vector3.one;
 
 
     private Input myInput = null; 
@@ -61,25 +61,25 @@ public class stateChangeEffect : MonoBehaviour
         //timeOfDay = GetComponent<timeOfDay>();
         myMeshRenderer = GetComponent<MeshRenderer>();
         myShader = GetComponent<Shader>();
-        myCollider = GetComponent<Collider>();
+        //myCollider = GetComponent<Collider>();
 
 
         // disable effect kinda
-        transform.localScale = Vector3.zero;
-        myCollider.includeLayers = 7;
-        transform.position += (Vector3.up * .25f);//offset);
+        //transform.localScale = Vector3.zero;
+        //myCollider.includeLayers = 7;
+        //transform.position += (Vector3.up * .25f);//offset);
         Debug.Log(transform.position);
 
         if (!timerEnable)
             myTimer = 1;
 
 
-        myCollider.isTrigger = true;
+        //myCollider.isTrigger = true;
 
-        myIncrement = (0.5f / ((float)myTimer));
+        //myIncrement = (0.5f / ((float)myTimer));
 
         tempTimer = myTimer + 1;
-        myThingyIncrement = (10 / (float)myTimer);
+        //myThingyIncrement = (10 / (float)myTimer);
 
     }
 
@@ -117,13 +117,13 @@ public class stateChangeEffect : MonoBehaviour
     {
         //slow mow!
         // enable sphere
-        transform.localScale = Vector3.one;
+        //transform.localScale = Vector3.one;
 
         // reset timer
         //if (timerEnable)
         //{
             tempTimer = 1;
-            myThingy = 1f + myThingyIncrement;
+            //myThingy = 1f + myThingyIncrement;
         //}
 
 
@@ -151,21 +151,21 @@ public class stateChangeEffect : MonoBehaviour
     {
         //Debug.Log("here");
 
-        if (tempTimer <= myTimer)
-        {
+        //if (tempTimer <= myTimer)
+        //{
 
-            Time.timeScale = Mathf.Log10(myThingy);
-            // increment timer
-            tempTimer += 1;
-            myThingy += myThingyIncrement;
-            // EXPAND
-            transform.localScale += myVector3;
-        }
-        else // this is happening every frame :/
-        { // timer is up 
-            Time.timeScale = 1.0f;
-            transform.localScale = Vector3.zero;
-        }
+        //    Time.timeScale = Mathf.Log10(myThingy);
+        //    // increment timer
+        //    tempTimer += 1;
+        //    myThingy += myThingyIncrement;
+        //    // EXPAND
+        //    transform.localScale += myVector3;
+        //}
+        //else // this is happening every frame :/
+        //{ // timer is up 
+        //    Time.timeScale = 1.0f;
+        //    transform.localScale = Vector3.zero;
+        //}
 
 
     }
