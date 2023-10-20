@@ -63,10 +63,6 @@ public class stateChangeEffect : MonoBehaviour
         myShader = GetComponent<Shader>();
         myCollider = GetComponent<Collider>();
 
-        //dayProcess = find;
-
-        // expand rate applied here
-        //myVector3 = myVector3 * expandRate;
 
         // disable effect kinda
         transform.localScale = Vector3.zero;

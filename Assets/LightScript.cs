@@ -26,17 +26,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         increment = (myLight.intensity / stateShift.myTimer);
         shadowInc = (myLight.shadowStrength / stateShift.myTimer);
-        // if we are not active in the day and it is day 
-        //                  and
-        // if we are not active at night and it is night ... 
-        // thats what this should be, but this is what works so idk
 
-        //if (stateShift.timeOfDay && !activeDay)
-        //{
-        //    gameObject.SetActive(false);
-        //}
-        //else
-        //    gameObject.SetActive(true);
         if (stateShift.timeOfDay && !activeDay)//(activeDay && stateShift.timeOfDay) || (activeNight && !stateShift.timeOfDay))
         {
             myLight.intensity = 0f;
@@ -76,15 +66,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
         return;
 
-
-
-        tempTimer = 0;
-
-        if(stateShift.timerEnable)
-        {
-            tempTimer = stateShift.myTimer + 1;
-        }
-        wait = true;
     }
 
     private void Update()

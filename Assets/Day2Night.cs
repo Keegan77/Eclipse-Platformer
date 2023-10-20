@@ -20,37 +20,27 @@ public class Day2Night : MonoBehaviour
     //--------------------------------------------------------//
 
 
-    //public Shader myDayShader, myNightShader;
-
-    //public Texture dayTexture, nightTexture;
-
     public Material myDayTexture, myNightTexture;
     private Rigidbody myRigidbody;
     private Rigidbody tempRigidbody;
     int frames;
-    //private Time myTime;
-    private stateChangeEffect stateShift;
-    //public stateChangeEffect stateShift;
 
-    //public GameObject myObject;
+    private stateChangeEffect stateShift;
+
 
     private Collider myCollider;
 
     public bool dayCollision;
     public bool nightCollision;
 
-    // transform? 
-
-    //Renderer myRenderer;
-
     private Renderer myRenderer;
 
     private MeshRenderer myMeshRenderer;
-    //private bool wait = false;
+
     private bool counting = false;
 
 
-    //private myMove myMove;
+
 
 
     private void myInteractionDay()
@@ -59,24 +49,17 @@ public class Day2Night : MonoBehaviour
 
         if (!dayCollision)
         {
-            //gameObject.SetActive(false);
 
-            //return;
             gameObject.GetComponent<Renderer>().enabled = false;
 
             myCollider.excludeLayers = 0;
             myRigidbody.excludeLayers = 0;
             myCollider.enabled = false;
-            //myMeshRenderer.material.color.a = 0;
-            //myMeshRenderer.SetA
-
 
         }
         else
         {
-            //gameObject.SetActive(true);
 
-            //return;
 
             gameObject.GetComponent<Renderer>().enabled = true;
 
@@ -87,10 +70,6 @@ public class Day2Night : MonoBehaviour
             myMeshRenderer.material = myDayTexture;
         }
 
-        //myMeshRenderer.material = myDayTexture;
-
-
-
     }
     private void myInteractionNight()
     { // here we define what properties the object will have at night 
@@ -99,7 +78,6 @@ public class Day2Night : MonoBehaviour
         if (!nightCollision)
         {
 
-            //gameObject.SetActive(false);
             gameObject.GetComponent<Renderer>().enabled = false;
 
             myCollider.excludeLayers = 0;
@@ -109,9 +87,7 @@ public class Day2Night : MonoBehaviour
         }
         else
         {
-            //gameObject.SetActive(true);
 
-            //return;
             gameObject.GetComponent<Renderer>().enabled = true;
             myMeshRenderer.material = myNightTexture;
 
@@ -121,25 +97,16 @@ public class Day2Night : MonoBehaviour
             return;
         }
 
-        //myMeshRenderer.material = myNightTexture;
 
     }
 
     private void myInteraction()
     {
 
-        //if (!stateShift.timerEnable || counting == true) {
-        // if the player pressed the button before the timer went off 
-        if (stateShift.timeOfDay)//stateShift.timeOfDay)
+        if (stateShift.timeOfDay)
             myInteractionNight();
         else
             myInteractionDay();
-        //}
-
-        // start counting 
-        //counting = true;
-        // get the current frame for timer reference
-        //frames = Time.frameCount;
 
     }
 
@@ -164,7 +131,6 @@ public class Day2Night : MonoBehaviour
             myCollider = gameObject.AddComponent<Collider>();
 
         myRigidbody = GetComponent<Rigidbody>();
-        //tempRigidbody = new Rigidbody(myRigidbody);
 
 
         if (myRigidbody == null)
@@ -177,34 +143,31 @@ public class Day2Night : MonoBehaviour
         }
 
         myCollider.includeLayers = 7;
-        stateShift.myShift += myInteraction;//stateShift.myShift += myInteraction;
+        stateShift.myShift += myInteraction;
 
-        //gameObject.GetComponent<Renderer>().enabled = false;
 
-        if (stateShift.timeOfDay)//stateShift.timeOfDay)
+
+        if (stateShift.timeOfDay)
             myInteractionNight();
         else
             myInteractionDay();
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {   // if we are entered by the object we want to see
-        //Debug.Log(gameObject.name);
-        if (other.gameObject.TryGetComponent<stateChangeEffect>(out stateChangeEffect changer))
-        {
-            if (stateShift.timeOfDay)//stateShift.timeOfDay)
-                myInteractionDay();
-            else
-                myInteractionNight();
+    //private void OnTriggerEnter(Collider other)
+    //{   // if we are entered by the object we want to see
+    //    if (other.gameObject.TryGetComponent<stateChangeEffect>(out stateChangeEffect changer))
+    //    {
+    //        if (stateShift.timeOfDay)
+    //            myInteractionDay();
+    //        else
+    //            myInteractionNight();
 
-            counting = false;
-        }
-        //wait = true; // we found player effect. flip
-        return;
-    }
+    //        counting = false;
+    //    }
+    //    return;
+    //}
 
-    void Update() { }
 }
 
 
