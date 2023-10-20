@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64267496041ff354faeb66ea62a13c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myDayTexture: {fileID: 2100000, guid: e488fc6fd5162d04c86d09b193fa0d39, type: 2}
-  myNightTexture: {fileID: 2100000, guid: 31934d1de9d986048ba0efdf55acbe6f, type: 2}
-  dayCollision: 1
-  nightCollision: 0
+  myDayTexture: {fileID: 2100000, guid: 31934d1de9d986048ba0efdf55acbe6f, type: 2}
+  myNightTexture: {fileID: 2100000, guid: e488fc6fd5162d04c86d09b193fa0d39, type: 2}
+  dayCollision: 0
+  nightCollision: 1
