@@ -10,6 +10,8 @@ public class PlayerWallSlideState : PlayerState
     }
     Input input;
     public RaycastHit hit;
+    float timer;
+    float maxStateTime = 3;
 
     public override void StateStart()
     {
@@ -24,6 +26,7 @@ public class PlayerWallSlideState : PlayerState
     public override void StateExit()
     {
         base.StateExit();
+        timer = 0;
         input.Disable();
         input.Player.Jump.performed -= PerformWalljump;
         player.AnimationFinishedEvent(PlayerAnims.AnimationTriggers[PlayerAnims.AnimationNames.Wallslide]);
@@ -46,6 +49,8 @@ public class PlayerWallSlideState : PlayerState
     public override void StateUpdate()
     {
         base.StateUpdate();
+        timer += Time.deltaTime;
+
 
         player.transform.rotation = Quaternion.Lerp(player.transform.rotation, 
                                     Quaternion.FromToRotation(Vector3.right, hit.normal), 
@@ -56,6 +61,10 @@ public class PlayerWallSlideState : PlayerState
         if (player.CheckGround())
         {
             playerFsm.SwitchState(player.idleState);
+        }
+        if (timer > maxStateTime)
+        {
+            playerFsm.SwitchState(player.airborneState);
         }
 
     }
