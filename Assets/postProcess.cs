@@ -37,18 +37,7 @@ public class postProcess : MonoBehaviour
 
     private void stateChange()
     {
-        //enabled = stateShift.timeOfDay ? true : false; 
-        //gameObject.enabled = false;
-        //if (stateShift.timeOfDay)
-        //{
-        //if (stateShift.timeOfDay && !activeDay)
-        //{
-        //    gameObject.SetActive(false);
-        //}
-        //else if (!stateShift.timeOfDay && activeDay)
-        //{
-        //    gameObject.SetActive(false);
-        //}
+
         gameObject.SetActive(false );
 
         if (stateShift.timeOfDay)
