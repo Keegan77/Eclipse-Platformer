@@ -107,7 +107,7 @@ MonoBehaviour:
   wallslideSpeed: 10
   wallslideTurnSpeed: 30
   walljumpDistance: 500
-  walljumpHeight: 300
+  walljumpHeight: 350
   rb: {fileID: 5945421513744250802}
   cam: {fileID: 0}
   animator: {fileID: 3159665013910601903}
