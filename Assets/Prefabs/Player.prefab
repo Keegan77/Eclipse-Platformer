@@ -118,6 +118,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 320
+  walljump:
+    serializedVersion: 2
+    m_Bits: 256
   groundCollX: 5.2
   groundCollY: 5.5
   groundCollZ: 3.82
@@ -381,6 +384,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
       propertyPath: m_Name
       value: Clover_GameReadyModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 988111051383497317, guid: c2b185fc7905a0f45bb32fa72a134694, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

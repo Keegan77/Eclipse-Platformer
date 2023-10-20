@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
     public CapsuleCollider playerCollider;
     public CapsuleCollider playerDiveCollider;
     public LayerMask whatIsGround;
+    public LayerMask walljump;
 
     //public Animator animator;
 
