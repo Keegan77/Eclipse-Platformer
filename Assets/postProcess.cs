@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class postProcess : MonoBehaviour
 {
     // Start is called before the first frame update
     private stateChangeEffect stateShift;
+    private GameObject myObject;
 
     public bool activeDay;
 
@@ -17,6 +19,15 @@ public class postProcess : MonoBehaviour
     {
         stateShift = FindObjectOfType<stateChangeEffect>();
         stateShift.myShift += stateChange;
+
+        if (stateShift.timeOfDay && !activeDay)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+            gameObject.SetActive(true);
+
+        //myObject = gameObject.find
     }
 
     private void OnDestroy()
@@ -26,18 +37,35 @@ public class postProcess : MonoBehaviour
 
     private void stateChange()
     {
-        //if (stateShift.timeOfDay)
-            //RenderSettings.skybox = dayBox;
-        //else
-            //RenderSettings.skybox = nightBox;
-        if (activeDay)
+
+        gameObject.SetActive(false );
+
+        if (stateShift.timeOfDay)
         {
-            enabled = true;
+            if (activeDay)
+            {
+                gameObject.SetActive(true );
+            }
         }
         else
         {
-            enabled = false;
+            if(!activeDay)
+            {
+                gameObject.SetActive(true);
+            }
         }
+
+        //}
+        //else
+        //{
+        //    if (!activeDay)
+        //    {
+        //        gameObject.SetActive(true);
+        //    }
+        //    else
+        //        gameObject.SetActive(false);
+        //}
+
     }
 
 

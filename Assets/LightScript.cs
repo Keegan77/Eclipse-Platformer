@@ -26,11 +26,8 @@ public class NewBehaviourScript : MonoBehaviour
 
         increment = (myLight.intensity / stateShift.myTimer);
         shadowInc = (myLight.shadowStrength / stateShift.myTimer);
-        // if we are not active in the day and it is day 
-        //                  and
-        // if we are not active at night and it is night ... 
-        // thats what this should be, but this is what works so idk
-        if ((activeDay && stateShift.timeOfDay) || (activeNight && !stateShift.timeOfDay))
+
+        if (stateShift.timeOfDay && !activeDay)//(activeDay && stateShift.timeOfDay) || (activeNight && !stateShift.timeOfDay))
         {
             myLight.intensity = 0f;
             myLight.shadowStrength = 0f;
@@ -38,6 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         increment *= -1f;
         shadowInc *= -1f;
+
     }
 
     private void OnDestroy()
@@ -46,15 +44,35 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     private void stateChange() 
-    { 
-        tempTimer = 0;
-        wait = true;
+    {
+        myLight.intensity = 0f;
+        myLight.shadowStrength = 0f;
+
+        if (stateShift.timeOfDay)
+        {
+            if (activeDay)
+            {
+                myLight.intensity = 1f;
+                myLight.shadowStrength = 1f;
+            }
+        }
+        else
+        {
+            if (!activeDay)
+            {
+                myLight.intensity = 1f;
+                myLight.shadowStrength = 1f;
+            }
+        }
+        return;
+
     }
 
     private void Update()
     {
         if (wait)
         {
+            Debug.Log(myLight.shadowStrength);
             if (tempTimer > stateShift.myTimer)
             {
                 myLight.intensity = Mathf.Round(myLight.intensity);
