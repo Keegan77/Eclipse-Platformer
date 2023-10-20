@@ -66,4 +66,15 @@ public class PlayerAirborneState : PlayerState
             //Debug.Log("Switched");
         }
     }
+
+    public override void StateCollisionEnter(Collision collision)
+    {
+        base.StateCollisionEnter(collision);
+        RaycastHit hit;
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 1) && !player.CheckGround())
+        {
+
+        }
+    }
+
 }

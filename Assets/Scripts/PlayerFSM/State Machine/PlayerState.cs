@@ -24,4 +24,6 @@ public class PlayerState
     public virtual void StateCollisionEnter(Collision collision) { }
 
     public virtual void StateCollisionStay(Collision collision) { }
+
+    public virtual void StateCollisionExit(Collision collision) { }
 }

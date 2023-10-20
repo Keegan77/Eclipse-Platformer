@@ -50,8 +50,8 @@ public class Player : MonoBehaviour
     public Transform cam;
     public Animator animator;
     public Transform groundCheck, playerRot;
-    public BoxCollider playerCollider;
-    public BoxCollider playerDiveCollider;
+    public CapsuleCollider playerCollider;
+    public CapsuleCollider playerDiveCollider;
     public LayerMask whatIsGround;
 
     //public Animator animator;
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
     public PlayerDivingState diveState;
     public PlayerSlidingState slideState;
     public PlayerRolloutState rolloutState;
+    public PlayerWallSlideState wallslideState;
 
     
 
@@ -93,11 +94,12 @@ public class Player : MonoBehaviour
         diveState = new PlayerDivingState(this, stateMachine);
         slideState = new PlayerSlidingState(this, stateMachine);
         rolloutState = new PlayerRolloutState(this, stateMachine);
+        wallslideState = new PlayerWallSlideState(this, stateMachine);
+
     }
 
     private void Start()
     {
-        cacheCollSize = playerCollider.size;
         SwitchCollisionsToNormal();
 
 
@@ -108,7 +110,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentPlayerState.StateUpdate();
-        Debug.Log(playerCollider.size);
         CheckGround();
     }
 
@@ -222,6 +223,11 @@ public class Player : MonoBehaviour
     {
         playerCollider.enabled = false;
         playerDiveCollider.enabled = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        stateMachine.currentPlayerState.StateCollisionExit(collision);
     }
 
 }

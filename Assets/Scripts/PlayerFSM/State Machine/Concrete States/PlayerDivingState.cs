@@ -38,9 +38,6 @@ public class PlayerDivingState : PlayerState
         //player.transform.rotation = Quaternion.Lerp(player.transform.rotation, Quaternion.Euler(new Vector3(0, (player.targetAngle - player.cam.eulerAngles.y) + player.transform.eulerAngles.y, 0)), Time.deltaTime * player.airTurnControlSpeed);
         player.rb.velocity = new Vector3(player.transform.forward.x * player.divingMaxSpeed, player.rb.velocity.y, player.transform.forward.z * player.divingMaxSpeed);
     }
-
-
-
     public override void StateUpdate()
     {
         base.StateUpdate();
