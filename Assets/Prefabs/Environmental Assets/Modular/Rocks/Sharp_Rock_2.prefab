@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 914bac2f8e3fc8745934576152bf7986, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f7f7931ad23eae4f863cedea8621482, type: 2}
     - target: {fileID: 919132149155446097, guid: 914bac2f8e3fc8745934576152bf7986, type: 3}
       propertyPath: m_Name
       value: Sharp_Rock_2
