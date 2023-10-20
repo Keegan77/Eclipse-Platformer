@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour 
+public class LightScript : MonoBehaviour 
 {
 
     public bool activeDay;
@@ -21,8 +21,6 @@ public class NewBehaviourScript : MonoBehaviour
         stateShift = FindObjectOfType<stateChangeEffect>();
         stateShift.myShift += stateChange;
         myLight = GetComponent<Light>();
-
-        myLight.lightmapBakeType = LightmapBakeType.Realtime;
 
         increment = (myLight.intensity / stateShift.myTimer);
         shadowInc = (myLight.shadowStrength / stateShift.myTimer);
