@@ -60,7 +60,7 @@ public class PlayerAirborneState : PlayerState
                                          Time.deltaTime * player.accelSpeed / 5);
 
 
-        if (player.CheckGround() && player.rb.velocity.y < 0)
+        if (player.CheckGround())
         {
             playerFsm.SwitchState(player.movementState);
             //Debug.Log("Switched");
