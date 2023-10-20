@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class AsyncLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
-
+    [SerializeField] GameObject spinningIcon;
+    [SerializeField] float rotationSpeed;
+    
     public void LoadLevel(int sceneId)
     {
         loadingScreen.SetActive(true);
@@ -20,6 +22,7 @@ public class AsyncLoader : MonoBehaviour
 
         while (!loadOperation.isDone)
         {
+            spinningIcon.transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
             yield return null;
         }
     }

@@ -554,7 +554,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1034442574342589819, guid: a9f42e84e633011479a8f27d0fc5dbbf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -641,9 +642,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 890696607613359991, guid: d4adbb8284e661942956d27fcfb1438d, type: 3}
+      propertyPath: spinningIcon
+      value: 
+      objectReference: {fileID: 1001512240}
+    - target: {fileID: 890696607613359991, guid: d4adbb8284e661942956d27fcfb1438d, type: 3}
       propertyPath: loadingScreen
       value: 
       objectReference: {fileID: 797358158}
+    - target: {fileID: 890696607613359991, guid: d4adbb8284e661942956d27fcfb1438d, type: 3}
+      propertyPath: rotationSpeed
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 3977902681726123526, guid: d4adbb8284e661942956d27fcfb1438d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -733,6 +742,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4adbb8284e661942956d27fcfb1438d, type: 3}
+--- !u!1 &1001512240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1275266050136433912, guid: a9f42e84e633011479a8f27d0fc5dbbf, type: 3}
+  m_PrefabInstance: {fileID: 797358157}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1570531157
 GameObject:
   m_ObjectHideFlags: 0
