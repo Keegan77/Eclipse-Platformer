@@ -15,7 +15,7 @@ TagManager:
   - UI
   - Ground
   - stateChangeCollision
-  - NoWallJump
+  - WallJump
   - 
   - 
   - CelShaded
