@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 
 // this script attaches to the player object
@@ -19,6 +20,7 @@ public class stateChangeEffect : MonoBehaviour
     public bool timeOfDay = false;
     private MeshRenderer myMeshRenderer;
     public Material myDayTexture, myNightTexture;
+    //public float offset;
     private Shader myShader;
 
     public delegate void MyDelegate();
@@ -62,6 +64,8 @@ public class stateChangeEffect : MonoBehaviour
         // disable effect kinda
         transform.localScale = Vector3.zero;
         myCollider.includeLayers = 7;
+        transform.position += (Vector3.up * .25f);//offset);
+        Debug.Log(transform.position);
 
 
         myCollider.isTrigger = true;

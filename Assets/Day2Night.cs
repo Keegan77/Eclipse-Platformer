@@ -26,6 +26,7 @@ public class Day2Night : MonoBehaviour
 
     public Material myDayTexture, myNightTexture;
     private Rigidbody myRigidbody;
+    private Rigidbody tempRigidbody;
     int frames;
     //private Time myTime;
     private stateChangeEffect stateShift;
@@ -57,10 +58,14 @@ public class Day2Night : MonoBehaviour
         if (!dayCollision)
         {
             myCollider.excludeLayers = 0;
+            myRigidbody.excludeLayers = 0;
+            myCollider.enabled = false;
         }
         else
         {
+            myCollider.enabled = true;
             myCollider.includeLayers = 0;
+            myRigidbody.includeLayers = 0;
         }
 
         myMeshRenderer.material = myDayTexture;
@@ -71,16 +76,20 @@ public class Day2Night : MonoBehaviour
     private void myInteractionNight()
     { // here we define what properties the object will have at night 
 
-
+        
         if (!nightCollision)
         {
             myCollider.excludeLayers = 0;
-
+            myRigidbody.excludeLayers = 0;
+            myCollider.enabled = false;
+            //myRigidbody.
+            //myRigidbody.
         }
         else
         {
+            myCollider.enabled = true;
             myCollider.includeLayers = 0;
-
+            myRigidbody.includeLayers = 0;
         }
 
         myMeshRenderer.material = myNightTexture;
@@ -124,9 +133,18 @@ public class Day2Night : MonoBehaviour
         if(myCollider == null)
             myCollider = gameObject.AddComponent<Collider>();
 
-        myRigidbody = gameObject.AddComponent<Rigidbody>();
+        myRigidbody = GetComponent<Rigidbody>();
+        //tempRigidbody = new Rigidbody(myRigidbody);
+        
 
-        myRigidbody.useGravity = false;
+        if (myRigidbody == null)
+        {
+            myRigidbody = gameObject.AddComponent<Rigidbody>();
+
+            myRigidbody.useGravity = false;
+
+            myRigidbody.isKinematic = true;
+        }
 
         myCollider.includeLayers = 7;
         stateShift.myShift += myInteraction;//stateShift.myShift += myInteraction;
@@ -151,15 +169,6 @@ public class Day2Night : MonoBehaviour
 
     void Update() {
 
-
-
-
-        //if (wait /*|| myTime*/) // we are checking for player effect
-        //{
-        //    if (stateShift.timeOfDay)
-        //        myInteractionNight();
-        //    else
-        //        myInteractionDay();
         if (counting && (Time.frameCount > (frames + stateShift.myTimer))) {
             // if the invoke has been called
             //     AND  we have not hit the effect
