@@ -117,7 +117,7 @@ MonoBehaviour:
   playerDiveCollider: {fileID: 8052334685529735130}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   groundCollX: 5.2
   groundCollY: 5.5
   groundCollZ: 3.82
