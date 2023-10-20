@@ -36,7 +36,6 @@ public class PlayerWalljumpState : PlayerState
         base.StateFixedUpdate();
 
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, hit.normal);
-        Debug.Log(hit.normal);
         if (hit.normal.z != -1)
         {
             player.transform.rotation = Quaternion.Lerp(player.transform.rotation,

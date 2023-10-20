@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3997808606163910264}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   playerDiveCollider: {fileID: 8052334685529735130}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   groundCollX: 5.2
   groundCollY: 5.5
   groundCollZ: 3.82
@@ -130,7 +130,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497178514475356677}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2bbd7a3bda1cc814d89414175aeacd17, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
