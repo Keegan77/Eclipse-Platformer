@@ -116,7 +116,6 @@ public class stateChangeEffect : MonoBehaviour
 
         if (timeOfDay)
         {
-
             myMeshRenderer.material = myNightTexture;
             timeOfDay = !timeOfDay;
         }
