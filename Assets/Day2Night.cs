@@ -39,10 +39,6 @@ public class Day2Night : MonoBehaviour
 
     private bool counting = false;
 
-
-
-
-
     private void myInteractionDay()
     { // here we define what properties the object will have during the day
 
@@ -59,7 +55,6 @@ public class Day2Night : MonoBehaviour
         }
         else
         {
-
 
             gameObject.GetComponent<Renderer>().enabled = true;
 
@@ -94,9 +89,7 @@ public class Day2Night : MonoBehaviour
             myCollider.enabled = true;
             myCollider.includeLayers = 0;
             myRigidbody.includeLayers = 0;
-            return;
         }
-
 
     }
 
@@ -145,28 +138,12 @@ public class Day2Night : MonoBehaviour
         myCollider.includeLayers = 7;
         stateShift.myShift += myInteraction;
 
-
-
         if (stateShift.timeOfDay)
             myInteractionNight();
         else
             myInteractionDay();
 
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{   // if we are entered by the object we want to see
-    //    if (other.gameObject.TryGetComponent<stateChangeEffect>(out stateChangeEffect changer))
-    //    {
-    //        if (stateShift.timeOfDay)
-    //            myInteractionDay();
-    //        else
-    //            myInteractionNight();
-
-    //        counting = false;
-    //    }
-    //    return;
-    //}
 
 }
 
