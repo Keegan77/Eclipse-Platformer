@@ -6,17 +6,20 @@ public class StarChecker : MonoBehaviour
 {
 
     public StarContainer starContainer;
+    public Vector3 initPos;
+    float sinMagnitude = 2;
+    float sinDistance = .1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        initPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = new Vector3(transform.position.x, (Mathf.Sin(Time.time * sinMagnitude) * sinDistance) + initPos.y, transform.position.z);
     }
 
     private void OnCollisionEnter(Collision collision)
