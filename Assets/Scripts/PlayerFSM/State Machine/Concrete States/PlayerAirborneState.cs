@@ -67,12 +67,12 @@ public class PlayerAirborneState : PlayerState
         }
     }
 
-    public override void StateCollisionEnter(Collision collision)
+    public override void StateCollisionStay(Collision collision)
     {
-        base.StateCollisionEnter(collision);
+        base.StateCollisionStay(collision);
         Debug.Log(player.rb.velocity);
         RaycastHit hit;
-        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 3f) && !player.CheckGround() && player.rb.velocity.y < 3)
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 3f) && !player.CheckGround())
         {
             player.wallslideState.hit = hit;
             playerFsm.SwitchState(player.wallslideState);
