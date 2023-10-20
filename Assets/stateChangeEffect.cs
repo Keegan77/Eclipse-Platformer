@@ -38,7 +38,7 @@ public class stateChangeEffect : MonoBehaviour
 
 
     // # of frames we expand for
-    public int myTimer = 60;
+    public int myTimer = 1;
     private int tempTimer;
 
     private float myTempIncrement;
@@ -73,6 +73,9 @@ public class stateChangeEffect : MonoBehaviour
         myCollider.includeLayers = 7;
         transform.position += (Vector3.up * .25f);//offset);
         Debug.Log(transform.position);
+
+        if (!timerEnable)
+            myTimer = 1;
 
 
         myCollider.isTrigger = true;
@@ -121,11 +124,11 @@ public class stateChangeEffect : MonoBehaviour
         transform.localScale = Vector3.one;
 
         // reset timer
-        if (timerEnable)
-        {
+        //if (timerEnable)
+        //{
             tempTimer = 1;
             myThingy = 1f + myThingyIncrement;
-        }
+        //}
 
 
         if (timeOfDay)
