@@ -100,10 +100,14 @@ MonoBehaviour:
   verticalDiveHeight: 150
   horizontalDiveAmount: 200
   divingMaxSpeed: 15
-  slideDeccelAmount: 3
+  slideDeccelAmount: 1
   slideInitialSpeed: 20
   rolloutSpeed: 150
   rollHeight: 125
+  wallslideSpeed: 10
+  wallslideTurnSpeed: 30
+  walljumpDistance: 500
+  walljumpHeight: 350
   rb: {fileID: 5945421513744250802}
   cam: {fileID: 0}
   animator: {fileID: 3159665013910601903}

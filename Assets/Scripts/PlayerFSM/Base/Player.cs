@@ -43,6 +43,14 @@ public class Player : MonoBehaviour
     public float rolloutSpeed;
     public float rollHeight;
 
+    [Header("Wallslide Values")]
+    [Tooltip("Positive integer required")]
+    public float wallslideSpeed;
+    public float wallslideTurnSpeed;
+    [Header("Walljump Values")]
+    public float walljumpDistance;
+    public float walljumpHeight;
+
     //components
     [Header("Component Refs")]
 
@@ -71,11 +79,12 @@ public class Player : MonoBehaviour
     public PlayerSlidingState slideState;
     public PlayerRolloutState rolloutState;
     public PlayerWallSlideState wallslideState;
+    public PlayerWalljumpState walljumpState;
 
     
 
     //getters
-    public Vector3 movedirection { get; private set; }
+    public Vector3 movedirection { get; set; }
     public float targetAngle { get; set; }
     
     [HideInInspector] public Vector3 cacheCollSize;
@@ -95,6 +104,7 @@ public class Player : MonoBehaviour
         slideState = new PlayerSlidingState(this, stateMachine);
         rolloutState = new PlayerRolloutState(this, stateMachine);
         wallslideState = new PlayerWallSlideState(this, stateMachine);
+        walljumpState = new PlayerWalljumpState(this, stateMachine);
 
     }
 
@@ -146,6 +156,7 @@ public class Player : MonoBehaviour
                             new Vector3(transform.localScale.x / groundCollX,
                                         transform.localScale.y / groundCollY,
                                         transform.localScale.z / groundCollZ) * 2);
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 
 
