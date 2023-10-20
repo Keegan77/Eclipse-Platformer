@@ -71,6 +71,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8a46fd1874681444aba1066a20c7d7b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8028027844685136334}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8a46fd1874681444aba1066a20c7d7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5959304107767380980}
   m_SourcePrefab: {fileID: 100100000, guid: f8a46fd1874681444aba1066a20c7d7b, type: 3}
 --- !u!1 &5022569059224854077 stripped
 GameObject:
@@ -98,3 +101,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03, y: 0.030000007, z: 0.0025000006}
   m_Center: {x: 0, y: 0, z: 0.0012500003}
+--- !u!114 &5959304107767380980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022569059224854077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64267496041ff354faeb66ea62a13c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDayTexture: {fileID: 2100000, guid: 30314cee3b8a25d4897796d47aef32f9, type: 2}
+  myNightTexture: {fileID: 0}
+  dayCollision: 1
+  nightCollision: 0
