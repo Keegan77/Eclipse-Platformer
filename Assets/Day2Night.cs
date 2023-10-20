@@ -82,8 +82,7 @@ public class Day2Night : MonoBehaviour
             myCollider.excludeLayers = 0;
             myRigidbody.excludeLayers = 0;
             myCollider.enabled = false;
-            //myRigidbody.
-            //myRigidbody.
+
         }
         else
         {
@@ -98,8 +97,8 @@ public class Day2Night : MonoBehaviour
 
     private void myInteraction()
     {
-
-        if (counting == true) {
+        
+        if (!stateShift.timerEnable || counting == true) {
             // if the player pressed the button before the timer went off 
             if (stateShift.timeOfDay)//stateShift.timeOfDay)
                 myInteractionNight();
@@ -157,9 +156,9 @@ public class Day2Night : MonoBehaviour
         //Debug.Log(gameObject.name);
         if (other.gameObject.TryGetComponent<stateChangeEffect>( out stateChangeEffect changer)) {
             if (stateShift.timeOfDay)//stateShift.timeOfDay)
-                myInteractionNight();
-            else
                 myInteractionDay();
+            else
+                myInteractionNight();
 
             counting = false;
         }
@@ -169,22 +168,27 @@ public class Day2Night : MonoBehaviour
 
     void Update() {
 
-        if (counting && (Time.frameCount > (frames + stateShift.myTimer))) {
-            // if the invoke has been called
-            //     AND  we have not hit the effect
-            //     AND  the timer has gone off
-            counting = false;
+        if (stateShift.timerEnable)
+        {
+            if (counting && (Time.frameCount > (frames + stateShift.myTimer)))
+            {
+                // if the invoke has been called
+                //     AND  we have not hit the effect
+                //     AND  the timer has gone off
+                counting = false;
 
-            if (stateShift.timeOfDay)
-                myInteractionNight();
-            else
-                myInteractionDay();
+                if (stateShift.timeOfDay)
+                    myInteractionNight();
+                else
+                    myInteractionDay();
 
+            }
         }
+    }
 
     }
 
 
 
-}
+
 
