@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
     public float rolloutSpeed;
     public float rollHeight;
 
+    [Header("Wallslide Values")]
+    [Tooltip("Positive integer required")]
+    public float wallslideSpeed;
+    public float wallslideTurnSpeed;
+
     //components
     [Header("Component Refs")]
 
@@ -146,6 +151,7 @@ public class Player : MonoBehaviour
                             new Vector3(transform.localScale.x / groundCollX,
                                         transform.localScale.y / groundCollY,
                                         transform.localScale.z / groundCollZ) * 2);
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 
 
