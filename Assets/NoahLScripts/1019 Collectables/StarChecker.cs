@@ -24,6 +24,7 @@ public class StarChecker : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             starContainer.Stars += 1;
+            Destroy(gameObject);
         }
     }
     //goes onto the star collectable
