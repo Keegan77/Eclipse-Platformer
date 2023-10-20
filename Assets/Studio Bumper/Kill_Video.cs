@@ -5,6 +5,8 @@ using UnityEngine;
 public class Kill_Video : MonoBehaviour
 {
 
+    public float vidTime;
+
     private void Awake()
 
     {
@@ -17,7 +19,7 @@ public class Kill_Video : MonoBehaviour
 
     {
 
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(vidTime);
 
         Object.Destroy(this.gameObject);
 
