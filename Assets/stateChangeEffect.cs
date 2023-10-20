@@ -14,10 +14,13 @@ using UnityEngine.InputSystem.HID;
 
 // frensel effect!
 
+// findgameobject 
+
 public class stateChangeEffect : MonoBehaviour
 {
     //private timeOfDay timeOfDay;
-    public bool timeOfDay = false;
+    public bool timeOfDay = true;
+    public bool timerEnable = true;
     private MeshRenderer myMeshRenderer;
     public Material myDayTexture, myNightTexture;
     //public float offset;
@@ -25,6 +28,9 @@ public class stateChangeEffect : MonoBehaviour
 
     public delegate void MyDelegate();
     public MyDelegate myShift;
+
+    public GameObject dayProcess;
+    public GameObject nightProcess;
 
 
     //private GameObject myGameObject;
@@ -114,20 +120,27 @@ public class stateChangeEffect : MonoBehaviour
         transform.localScale = Vector3.one;
 
         // reset timer
-        tempTimer = 1;
-        myThingy = 1f + myThingyIncrement;
+        if (timerEnable)
+        {
+            tempTimer = 1;
+            myThingy = 1f + myThingyIncrement;
+        }
 
 
         if (timeOfDay)
         {
             myMeshRenderer.material = myNightTexture;
             timeOfDay = !timeOfDay;
+            nightProcess.SetActive(false);
+            dayProcess.SetActive(true);
         }
         else
         {
 
             myMeshRenderer.material = myDayTexture;
             timeOfDay = !timeOfDay;
+            nightProcess.SetActive(true);
+            dayProcess.SetActive(false);
         }
 
 
