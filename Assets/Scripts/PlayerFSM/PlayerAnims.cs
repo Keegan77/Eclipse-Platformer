@@ -10,7 +10,8 @@ public class PlayerAnims
         Run,
         Jump,
         Dive,
-        Rollout
+        Rollout,
+        Wallslide
     }
 
     public static readonly Dictionary<AnimationNames, string> AnimationTriggers = new Dictionary<AnimationNames, string>
@@ -20,6 +21,7 @@ public class PlayerAnims
     { AnimationNames.Jump, "Jump"},
     { AnimationNames.Dive, "Dived"},
     { AnimationNames.Rollout, "Rollout"},
+    { AnimationNames.Wallslide, "Wallslide"},
     };
 
 }
