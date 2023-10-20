@@ -29,8 +29,8 @@ public class stateChangeEffect : MonoBehaviour
     public delegate void MyDelegate();
     public MyDelegate myShift;
 
-    public GameObject dayProcess;
-    public GameObject nightProcess;
+    //public GameObject dayProcess;
+    //public GameObject nightProcess;
 
 
     //private GameObject myGameObject;
@@ -63,9 +63,10 @@ public class stateChangeEffect : MonoBehaviour
         myShader = GetComponent<Shader>();
         myCollider = GetComponent<Collider>();
 
+        //dayProcess = find;
 
         // expand rate applied here
-        myVector3 = myVector3 * expandRate;
+        //myVector3 = myVector3 * expandRate;
 
         // disable effect kinda
         transform.localScale = Vector3.zero;
@@ -131,16 +132,16 @@ public class stateChangeEffect : MonoBehaviour
         {
             myMeshRenderer.material = myNightTexture;
             timeOfDay = !timeOfDay;
-            nightProcess.SetActive(false);
-            dayProcess.SetActive(true);
+            //nightProcess.SetActive(false);
+            //dayProcess.SetActive(true);
         }
         else
         {
 
             myMeshRenderer.material = myDayTexture;
             timeOfDay = !timeOfDay;
-            nightProcess.SetActive(true);
-            dayProcess.SetActive(false);
+            //nightProcess.SetActive(true);
+            //dayProcess.SetActive(false);
         }
 
 
