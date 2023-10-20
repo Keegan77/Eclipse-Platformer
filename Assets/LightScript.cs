@@ -8,7 +8,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     public bool activeDay;
     public bool activeNight;
-    //public bool LightDecay;
 
     private Light myLight;
     private bool wait;
