@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 
 // this script attaches to the player object
@@ -13,16 +14,23 @@ using UnityEngine.InputSystem;
 
 // frensel effect!
 
+// findgameobject 
+
 public class stateChangeEffect : MonoBehaviour
 {
     //private timeOfDay timeOfDay;
-    public bool timeOfDay = false;
+    public bool timeOfDay = true;
+    public bool timerEnable = true;
     private MeshRenderer myMeshRenderer;
     public Material myDayTexture, myNightTexture;
+    //public float offset;
     private Shader myShader;
 
     public delegate void MyDelegate();
     public MyDelegate myShift;
+
+    //public GameObject dayProcess;
+    //public GameObject nightProcess;
 
 
     //private GameObject myGameObject;
@@ -30,7 +38,7 @@ public class stateChangeEffect : MonoBehaviour
 
 
     // # of frames we expand for
-    public int myTimer = 60;
+    public int myTimer = 1;
     private int tempTimer;
 
     private float myTempIncrement;
@@ -56,12 +64,14 @@ public class stateChangeEffect : MonoBehaviour
         myCollider = GetComponent<Collider>();
 
 
-        // expand rate applied here
-        myVector3 = myVector3 * expandRate;
-
         // disable effect kinda
         transform.localScale = Vector3.zero;
         myCollider.includeLayers = 7;
+        transform.position += (Vector3.up * .25f);//offset);
+        Debug.Log(transform.position);
+
+        if (!timerEnable)
+            myTimer = 1;
 
 
         myCollider.isTrigger = true;
@@ -110,21 +120,27 @@ public class stateChangeEffect : MonoBehaviour
         transform.localScale = Vector3.one;
 
         // reset timer
-        tempTimer = 1;
-        myThingy = 1f + myThingyIncrement;
+        //if (timerEnable)
+        //{
+            tempTimer = 1;
+            myThingy = 1f + myThingyIncrement;
+        //}
 
 
         if (timeOfDay)
         {
-
             myMeshRenderer.material = myNightTexture;
             timeOfDay = !timeOfDay;
+            //nightProcess.SetActive(false);
+            //dayProcess.SetActive(true);
         }
         else
         {
 
             myMeshRenderer.material = myDayTexture;
             timeOfDay = !timeOfDay;
+            //nightProcess.SetActive(true);
+            //dayProcess.SetActive(false);
         }
 
 
