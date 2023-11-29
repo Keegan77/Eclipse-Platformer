@@ -12,7 +12,6 @@ public class MovingPlatforms : MonoBehaviour
     public float smooth;
     public float resetTime;
 
-    // Use this for initialization
     void Start()
     {
         ChangeTarget();
@@ -23,7 +22,6 @@ public class MovingPlatforms : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         movingPlatform.position = Vector3.Lerp(movingPlatform.position, newPosition, smooth * Time.deltaTime);

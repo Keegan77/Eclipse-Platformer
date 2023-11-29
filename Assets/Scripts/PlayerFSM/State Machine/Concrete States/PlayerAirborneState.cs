@@ -71,7 +71,7 @@ public class PlayerAirborneState : PlayerState
         base.StateCollisionStay(collision);
         Debug.Log(player.rb.velocity);
         RaycastHit hit;
-        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 2.5f, player.walljump) && !player.CheckGround())
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 2.5f, player.walljump) && player.rb.velocity.y < 0)
         {
             player.wallslideState.hit = hit;
             playerFsm.SwitchState(player.wallslideState);
